@@ -1,0 +1,225 @@
+@font-face {
+      font-family: alfont;
+      src: url(".../assets/fonts/alfont_com_Manifa-V2-Bold.ttf");
+  }
+
+  :root {
+      --body-bg-color: #fff;
+      --body-bgC-color: #EDEDED;
+      --primary-color: #fbf9f9;
+      --primary-text-color: #000;
+        }
+        .dark-theme {
+      --body-bg-color: #1a2035;
+      --body-bgC-color: #1a2035;
+      --primary-color: #2b2c40;
+      --primary-text-color: #fff;
+        }
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+  }
+  
+  body,html {
+      width: 100%;
+      height: 100%;
+      font-family: alfont;
+      background-color: #EDEDED;
+  }
+  .navbar{
+      background-color: var(--body-bg-color);
+      color: var(--primary-text-color);
+  }
+  #popup-container{
+      width: 40%;
+      height: 80%;
+      background-color: red;
+      position: absolute;
+      /* z-index: 99; */
+      bottom: 0%;
+      left: 50%;
+      transform: translate(-50%,-80%);
+  }
+.sipnner-container{
+      width: 100%;
+      height: 100%;
+      background-color:#fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 99;
+}
+/* From Uiverse.io by JaydipPrajapati1910 */ 
+.loader {
+width: 48px;
+height: 48px;
+margin: auto;
+position: relative;
+}
+
+.loader:before {
+content: '';
+width: 48px;
+height: 5px;
+background: #999;
+position: absolute;
+top: 60px;
+left: 0;
+border-radius: 50%;
+animation: shadow324 0.5s linear infinite;
+}
+
+.loader:after {
+content: '';
+width: 100%;
+height: 100%;
+background: rgb(61, 106, 255);
+position: absolute;
+top: 0;
+left: 0;
+border-radius: 4px;
+animation: jump7456 0.5s linear infinite;
+}
+
+@keyframes jump7456 {
+15% {
+border-bottom-right-radius: 3px;
+}
+
+25% {
+transform: translateY(9px) rotate(22.5deg);
+}
+
+50% {
+transform: translateY(18px) scale(1, .9) rotate(45deg);
+border-bottom-right-radius: 40px;
+}
+
+75% {
+transform: translateY(9px) rotate(67.5deg);
+}
+
+100% {
+transform: translateY(0) rotate(90deg);
+}
+}
+
+@keyframes shadow324 {
+
+0%,
+100% {
+transform: scale(1, 1);
+}
+
+50% {
+transform: scale(1.2, 1);
+}
+}
+.hidden{
+display: none;
+}
+  
+.ISO{
+      background-color: #D9D9D9;
+      color: #000;
+      border-radius: 20px;
+      padding: .5vw 1.8vw;
+      font-weight: 500;
+      position: relative;
+}
+.dot{
+      position: absolute;
+      top: 35%;
+      left: 10%;
+      width: 10px;
+      border-radius: 50%;
+      height: 10px;
+      background: linear-gradient(45deg,#0077c7, #0133a0);
+}
+.main-content{
+      width: 70%;
+      height: 68vh;
+      background-color: #EDEDED;
+      padding: 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: center ;
+      flex-wrap: wrap;
+      gap: 2vw;
+      margin: 0 auto;
+
+}
+.card{
+      width: 25%;
+      height: 55%;
+      background-color: white;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.6);
+      border-radius: 5px;
+      display: flex;
+      flex-direction:column;
+      align-items: center;
+      justify-content: space-evenly;
+      gap: 1vw;
+      padding: 1vw;
+      position: relative;
+}
+.info{
+      position: absolute;
+      top: 5%;
+      left: 85%;
+      width: 20px;
+      object-position: center;
+      object-position: center;
+}
+.card:hover .info{
+      filter: brightness(0) invert(1);
+      cursor: pointer;
+}
+.card:hover{
+      background:linear-gradient(135deg,#0077c7, #0133a0);
+color: #fff;
+/* filter: invert(100%);  */
+}
+.card:hover img{
+      filter: brightness(0) invert(1);
+}
+.card h3{
+      font-size: 1.8vw;
+      font-weight: 600;
+}
+
+
+
+@media screen and (width > 300px) and (width < 768px){
+
+      .main-content{
+            width: 100%;
+            height: 100vh;
+      padding-top: 5vw;
+      }
+      .btns{
+            display: none;
+      }
+      .nav2{
+            margin-top:4vw;
+      }
+      .active{
+            padding: 2.7vw;
+      }
+      .ISO{
+            /* font-size: 4vw; */
+            padding: 2vw 7vw;
+      }
+      .card{
+            width: 48%;
+            height: 30%;
+      }
+      .card h3{
+            text-align: center;
+            font-size: 5.5vw;
+      }
+}

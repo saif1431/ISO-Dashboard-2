@@ -1,0 +1,1811 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ISO Dashboard</title>
+  <link rel="shortcut icon" href="/images/Saqr logo 48.png" type="image/x-icon" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="./assets/css/bootstrap-5.0.2.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./assets/css/remixicon.css" />
+
+  <!-- AG Grid -->
+  <script src="./assets/js/agGrid/ag-grid-enterprise.js"></script>
+  <link rel="stylesheet" href="./assets/js/agGrid/semantic.css" />
+  <link rel="stylesheet" href="./assets/js/agGrid/main.css" />
+  <script src="./assets/js/agGrid/jquery-3.1.1.min.js"></script>
+  <script src="./assets/js/agGrid/semantic.js"></script>
+
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <link rel="stylesheet" href="/Personal View/style.css">
+  <!-- <link rel="stylesheet" href="/Personal View/sect1.css"> -->
+  <style>
+    :root {
+      --body-bg-color: #fff;
+      --body-bgC-color: #EDEDED;
+      --primary-color: #fbf9f9;
+      --primary-text-color: #000;
+    }
+
+    .dark-theme {
+      --body-bg-color: #1a2035;
+      --body-bgC-color: #1a2035;
+      --primary-color: #2b2c40;
+      --primary-text-color: #fff;
+    }
+
+    body {
+      width: 100%;
+      height: 100%;
+      background-color: var(--body-bgC-color);
+      color: var(--primary-text-color);
+    }
+
+    .active {
+      display: block;
+      /* Only the selected graph will be visible */
+    }
+
+    .logos {
+      display: flex;
+      align-items: center;
+      padding-left: 2vw;
+      gap: 2vw;
+      background-color: var(--body-bg-color);
+      color: var(--primary-text-color);
+    }
+
+    .logos img {
+      width: 3%;
+    }
+
+    .nav2 {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding-left: 2vw;
+      background-color: var(--body-bg-color);
+      color: var(--primary-text-color);
+      border-bottom: 2px solid #0077c7;
+    }
+
+    hr {
+      border: 1px solid #0077c7;
+      margin-bottom: 1vw;
+    }
+
+    nav {
+      width: 100%;
+      background-color: var(--body-bg-color);
+      font-weight: none;
+
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--primary-text-color);
+      font-size: 1.6vw;
+      font-weight: 100;
+      /* padding-left: 1vw; */
+    }
+
+    .activ {
+      /* font-weight: 500; */
+      padding: 1.2vw;
+      border-left: 2px solid #0077c7;
+      border-top-right-radius: 20px;
+      border-top-left-radius: 20px;
+      border-top: 2px solid #0077c7;
+      border-right: 2px solid #0077c7;
+      background-color: var(--body-bgC-color);
+      color: var(--primary-text-color);
+      /* color: #000; */
+      text-align: center;
+    }
+
+    .btns {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: .4vw;
+      padding-right: 2vw;
+      padding-bottom: .3vw;
+
+    }
+
+    .welcomeBtn {
+      font-size: 1.7vw;
+      font-weight: 600;
+      background: linear-gradient(to right, #0077c7, #0133a0);
+      padding: .3vw 1.3vw;
+      /* font-weight: 500; */
+      color: #fff;
+      /* color: var(--primary-text-color); */
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+
+    .setting {
+      display: flex;
+      align-items: center;
+      gap: 1vw;
+    }
+
+    .date {
+      text-align: center;
+      background-color: #D4D4D4;
+      font-size: 1.2vw;
+      border-radius: 20px;
+      padding: .3vw .8vw;
+    }
+
+    .ISO {
+      background-color: #D9D9D9;
+      color: var(--primary-text-color);
+      border-radius: 20px;
+      padding: .5vw 2vw;
+      /* font-weight: 200; */
+      position: relative;
+    }
+
+    .dot {
+      position: absolute;
+      top: 35%;
+      left: 10%;
+      width: 10px;
+      border-radius: 50%;
+      height: 10px;
+      background: linear-gradient(45deg, #0077c7, #0133a0);
+    }
+
+    @media screen and (width > 300px) and (width < 768px) {
+      .logos img {
+        width: 10%;
+      }
+
+      .nav-links {
+        margin-top: 10vw;
+      }
+
+      .nav-links a {
+        font-size: 5vw;
+      }
+
+      .activ {
+        padding: 5vw;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <nav class="nav">
+      <img style="width: 5%;" src="/images/Saqr logo 48.png" alt="Logo" class="nav-image">
+      <img style="width: 10%;" src="/images/image (1).png" alt="Second Image" class="nav-second-image">
+    </nav>
+    <header>
+      <div class="headerDiv1">
+        <img src="/images/image.png" alt="First Image" class="header-image">
+        <img src="/images/image 257.png" alt="Second Image" class="header-second-image">
+      </div>
+      <div class="headerDiv2">
+        <h1 class="header-text">DaaS Dashboard</h1>
+        <p style="font-size: 4.5vw !important;font-weight: 600; text-align: start;" class="header-subtext">Welcome Afnan
+        </p>
+      </div>
+    </header>
+  </div>
+  <div class="logos">
+    <img src="/images/Saqr logo 48.png" alt="">
+    <img style="width: 5%;" src="/images/logo2 (2).png" alt="">
+  </div>
+
+  <div class="nav2">
+    <div class="nav-links">
+      <a class="activ" href="/Personal View/operationalview.html">Personal View</a>
+      <a href="/Personal View/operationalview.html">Operational View</a>
+
+    </div>
+    <div class="btns">
+      <p class="welcomeBtn">Welcome Afnan!</p>
+      <div class="setting">
+        <p class="date">August 28, 2024</p>
+        <!-- <i class="ri-settings-2-line settingicon"></i> -->
+      </div>
+    </div>
+  </div>
+  <!-- <hr> -->
+  <!-- Slider Items -->
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide personal">
+        <section class="d-flex justify-content-center">
+          <!-- <div class="slider-name">Personal View</div> -->
+          <div class="w-75" style="margin-top: 0vh;">
+            <div class="row">
+              <!-- Row 1 -->
+              <div
+                style="display: flex; align-items:center; justify-content:center ; width: 80%;gap: 1vw; margin: 0 12vw;">
+
+                <div class="col-md-5">
+                  <div class="card card-wrapper network_active_id" style="height: vh; padding: 1vw;">
+                    <div id="activeCard" class="active-card" style="display: none;">
+                      <a href="page.html" class="" style="margin-top: 0px; font-size: 2vw; color: #fff;">Submit
+                        Request</a>
+                      <i style="font-size: 2vw; color: #fff;" class="ri-arrow-right-double-line"></i>
+                    </div>
+                    <h5>ID Card</h5>
+                    <div class="bg-white" style="
+                    height: 15%;
+                    padding: 3px 0px;
+                    border: 1px solid rgba(0, 0, 0, 0.125);
+                    border-radius: 0.25rem;
+                    width: 80%;
+                    margin-top: 20px;
+                    border-radius: 20px;
+                  ">
+                      <div>
+                        <img src="../assets/img/saudi-aramco-logo.png" alt=""
+                          style="width: 55%; margin-bottom:1vh ;margin-top: -35px" />
+                      </div>
+                      <div>
+                        <img class="employee_photo" src="../assets/img/id card image.jpeg" alt="" style="width: 30%;" />
+                      </div>
+                      <h2 class="card-text arabic_name "
+                        style=" margin-top: 1.5vh!important;margin-bottom: 0.15vh!important;color: #000">
+                        احــمد محمد الحملي
+                      </h2>
+                      <h4 class="card-text english_name"
+                        style="margin-bottom: 2vh !important;color: #000; font-size: 1.1rem">
+                        AHMAD AL HEMELI
+                      </h4>
+                      <div class="col col-md-12 idcolor mt-1" style="background: #2828ff; height: 6px">
+                        <label class="col-form-label"></label>
+                      </div>
+                      <div class="row mt-2" style="padding: 0 20px">
+                        <div class="col">
+                          <p class="text-start card_title" style="color: #000">
+                            CONSULTANT
+                          </p>
+                          <h6 class="text-start " style="color: #000">
+                            Badge No
+                          </h6>
+                        </div>
+                        <div class="col">
+                          <p class="text-end arabic_card_title" style="color: #000">
+                            Expiry Date
+                          </p>
+                          <h6 class="text-end" style="color: var(--bs-red)">
+                            Expiry Date
+                          </h6>
+                        </div>
+                      </div>
+                      <div class="row" style="padding: 0 20px">
+                        <div class="col">
+                          <h4 class="text-start badge_number" style="color: #000">
+                            2329485
+                          </h4>
+                        </div>
+                        <div class="col">
+                          <h4 class="text-end expiry_date" style="color: var(--bs-red)">
+                            06/30/2025
+                          </h4>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- <img src="1.png" alt="" style="height: 100%" /> -->
+                  </div>
+                </div>
+                <div class="col-md-6" style="width: 65%;">
+                  <div class="card card-wrapper" style="height: 53vh;">
+                    <h3 style="padding: 1vw; width: 100%;  text-align: start; padding-bottom: 4vw; font-size: 1.5vw;">
+                      Digital Documentation</h3>
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                      <img style="width: 12vw; object-fit: contain;" src="/images/Group 698.png" alt="">
+                      <img style="width: 12vw; object-fit: contain;" src="/images/Group 697.png" alt="">
+                      <img style="width: 12vw; object-fit: contain;" src="/images/Group 696.png" alt="">
+
+                    </div>
+                    <!-- <img
+                  src="../assets/img/my.png"
+                  alt=""
+                  style="height: 100%"
+                /> -->
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="card card-wrapper vehicle_stickers" style="height: 53vh; width: 65%;">
+                    <h5 style="font-size: 6vw; margin-bottom: 4vw;">Vehicle Sticker</h5>
+                    <div class="swiper2 mySwiper mt-2" style="background: transparent">
+                      <div class="swiper-wrapper" style="background: transparent">
+
+                        <div class="swiper-slide" style="background: transparent">
+                          <!-- <img
+                        src="./saudi-white-number-plate.png"
+                        alt=""
+                      /> -->
+                          <div style="
+                          display: grid;
+                          grid-template-columns: 2fr 1.5fr;
+                          margin-left: 10px;
+                          height: 140px;
+                          border: 2px solid #000;
+                          border-radius: 10px;
+                          background-color: #fff;
+                        " class="h-fit-plate">
+                            <div class="plate-grid-item">
+                              <p class="plate-txt arabic-number">1511</p>
+                            </div>
+                            <div class="plate-grid-item">
+                              <p class="plate-txt arabic-text" style="font-size: 25px; white-space: nowrap">
+                                د ع ا
+                              </p>
+                            </div>
+                            <div class="plate-grid-item">
+                              <p class="plate-txt english-number">1511</p>
+                            </div>
+                            <div class="plate-grid-item">
+                              <p class="plate-txt english-text" style="font-size: 20px; white-space: nowrap">
+                                A E D
+                              </p>
+                            </div>
+                            <div class="text-start plate-grid-item vertical-item">
+                              <img src="../assets/img/download.jpg" width="15px" height="25px" style="
+                              position: absolute;
+                              top: 20%;
+                              left: 50%;
+                              bottom: 50%;
+                              transform: translate(-50%, -50%);
+                            " /><span class="vertical-txt" style="
+                              top: 55%;
+                              left: 50%;
+                              transform: translate(-50%, -50%);
+                            ">KSA</span>
+                              <div style="
+                              width: 10px;
+                              height: 10px;
+                              background-color: black;
+                              border-radius: 50%;
+                              position: absolute;
+                              top: 85%;
+                              transform: translate(-50%, -50%);
+                            "></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="swiper-slide" style="background: transparent">
+                          <!-- <img
+                        src="./saudi-white-number-plate.png"
+                        alt=""
+                      /> -->
+                          <div style="
+                          display: grid;
+                          grid-template-columns: 2fr 1.5fr;
+                          margin-left: 10px;
+                          height: 110px;
+                          border: 2px solid #000;
+                          border-radius: 10px;
+                          background-color: #fff;
+                        " class="h-fit-plate">
+                            <div class="plate-grid-item">
+                              <p class="plate-txt">1511</p>
+                            </div>
+                            <div class="plate-grid-item">
+                              <p class="plate-txt" style="font-size: 20px; white-space: nowrap">
+                                د ع ا
+                              </p>
+                            </div>
+                            <div class="plate-grid-item">
+                              <p class="plate-txt">1511</p>
+                            </div>
+                            <div class="plate-grid-item">
+                              <p class="plate-txt" style="font-size: 20px; white-space: nowrap">
+                                A E D
+                              </p>
+                            </div>
+                            <div class="text-start plate-grid-item vertical-item">
+                              <img src="../assets/img/download.jpg" width="15px" height="15px" style="
+                              position: absolute;
+                              top: 20%;
+                              left: 50%;
+                              bottom: 50%;
+                              transform: translate(-50%, -50%);
+                            " /><span class="vertical-txt" style="
+                              top: 55%;
+                              left: 50%;
+                              transform: translate(-50%, -50%);
+                            ">KSA</span>
+                              <div style="
+                              width: 10px;
+                              height: 10px;
+                              background-color: black;
+                              border-radius: 50%;
+                              position: absolute;
+                              top: 85%;
+                              transform: translate(-50%, -50%);
+                            "></div>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                    <a href="page.html" class="btn rounded-pill btn-primary sub-btn">Submit Request</a>
+                  </div>
+                </div>
+              </div>
+              <!-- Row 1 -->
+              <div class="col-md-7">
+                <div class="row">
+                  <!-- Row2------- -->
+                  <div style="width: 95%; margin-left: -6vw; display: flex; gap: 1vw;">
+
+                    <div class="col-md-6" style="width: 15vw;">
+                      <div class="card card-wrapper restricted_access mt-3" style="height: 20vh;">
+                        <h5>My Access</h5>
+                        <h4 style="font-size: 1.8vw;" class="value">8</h>
+                          <p>Restricted Request</p>
+                          <a href="page.html" class="btn rounded-pill btn-primary sub-btn" id="submitBtn">Submit
+                            Request</a>
+                      </div>
+                    </div>
+                    <div class="col-md-6" style="width: 15vw;">
+                      <div class="card card-wrapper restricted_access mt-3" style="height: 20vh">
+                        <h5>My Access</h5>
+                        <h4 style="font-size: 1.8vw;" class="value">8</h4>
+                        <p>Restricted Request</p>
+                        <a href="page.html" class="btn rounded-pill btn-primary sub-btn" id="submitBtn">Submit
+                          Request</a>
+                      </div>
+                    </div>
+                    <div class="col-md-6" style="width: 15vw;">
+                      <div class="card card-wrapper vms mt-3" style="height: 20vh" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        <h5>Digital Temporary Sticker</h5>
+                        <h4 style="font-size: 1.8vw;" class="value">10</h>
+                          <p>Issued Sticker</p>
+                          <a href="page.html" class="btn rounded-pill btn-primary sub-btn">Submit Request</a>
+                      </div>
+                    </div>
+                    <div class="col-md-6" style="width: 15vw;">
+                      <div class="card card-wrapper traffic_violations mt-3" style="height: 20vh" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        <h5>Visitor Management System</h5>
+                        <h4 style="font-size: 1.8vw;" class="value">5</h>
+                          <p>Requests</p>
+                          <a href="page.html" class="btn rounded-pill btn-primary sub-btn">Submit Request</a>
+                      </div>
+                    </div>
+                    <div class="col-md-6" style="width: 15vw;">
+                      <div class="card card-wrapper traffic_violations mt-3" style="height: 20vh; "
+                        data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <h5>Visitor Management System</h5>
+                        <h4 style="font-size: 1.8vw;" class="value">5</h>
+                          <p></p>
+                          <a href="page.html" class="btn rounded-pill btn-primary sub-btn">Submit Request</a>
+                      </div>
+                    </div>
+                    <div class="col-md-6" style="width: 5vw; ">
+                      <div class="card card-wrapper traffic_violations mt-3" style="height: 21vh; padding: .2vw;"
+                        data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <h5>Active id card</h5>
+                        <div class="bauble_box" onclick="toggleActiveCard()">
+                          <input class="bauble_input" id="bauble_check" name="bauble" type="checkbox">
+                          <label class="bauble_label" for="bauble_check">Toggle</label>
+                        </div>
+                        <!-- <h4 style="font-size: 1.8vw;" class="value">5</h> -->
+                        <!-- <p>fjkdfjd</p> -->
+
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Row2------- -->
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+
+
+      <div class="swiper-slide" style="display: none;">
+        <section class="d-flex justify-content-center VMS_ISO_CPH" style="display: none;">
+          <div class="slider-name">Visitor Managment System ISO Managment View</div>
+          <div class="w-85">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="card card-wrapper p-4" style="height: 45vh" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal">
+                  <canvas class="Chart25"></canvas>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card card-wrapper p-4" style="height: 45vh" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal">
+                  <canvas class="Chart26"></canvas>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card card-wrapper p-4" style="height: 45vh" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal">
+                  <h5>current valid visit request</h5>
+                  <div class="d-flex mt-5">
+                    <div class="text-center me-5" style="
+                          border-radius: 10px;
+                          border: 1px solid black;
+                          padding: 11px;
+                        ">
+                      <h1>15</h1>
+                      <span>Business</span>
+                    </div>
+                    <div class="text-center" style="
+                          border-radius: 10px;
+                          border: 1px solid black;
+                          padding: 11px;
+                        ">
+                      <h1>30</h1>
+                      <span>Personal</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card card-wrapper p-4" style="height: 45vh" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal">
+                  <canvas class="Chart27"></canvas>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card card-wrapper p-4 mt-3" style="height: 47vh" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal">
+                  <canvas class="Chart28"></canvas>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card card-wrapper p-4 mt-3" style="height: 47vh" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal">
+                  <h6>Top 25% visiting individuals</h6>
+                  <div class="table-responsive table-container" style="width: 100%; margin-top: -20px">
+                    <table class="table text-center mb-0 w-100">
+                      <thead>
+                        <tr>
+                          <th scope="col" style="font-size: 25px; text-align: start">
+                            Name
+                          </th>
+                          <th scope="col">#</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td style="text-align: start">Saleh</td>
+                          <td>50</td>
+                        </tr>
+                        <tr>
+                          <td style="text-align: start">ALi</td>
+                          <td>15</td>
+                        </tr>
+                        <tr>
+                          <td style="text-align: start">Sohaib</td>
+                          <td>1</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card card-wrapper p-4 mt-3" style="height: 47vh" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal">
+                  <h6>
+                    No of persons with <br />
+                    extended validity
+                  </h6>
+                  <h1 class="mt-2">20</h1>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card card-wrapper p-4 mt-3" style="height: 47vh" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal">
+                  <canvas class="Chart29"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="swiper-slide" style="display: none;">
+        <section class="d-flex justify-content-center">
+          <div class="slider-name">slider 13</div>
+          <div class="w-85">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card card-wrapper p-4 mt-5" style="height: 352px" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal">
+                  <h5>Traffic Violations</h5>
+                  <h6 class="mt-2">Subtitle</h6>
+                  <p class="mt-3" style="line-height: 30px">
+                    Nullam id dolor id nibh ultricies vehicula ut id elit.
+                    Cras justo odio, dapibus ac facilisis in, egestas eget
+                    quam. Donec id elit non mi porta gravida at eget metus.
+                  </p>
+                  <a href="page.html" class="btn rounded-pill btn-primary sub-btn mt-4 d-block">Submit Request</a>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card card-wrapper p-4 mt-5" style="height: 352px" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal">
+                  <h5>Traffic Violations</h5>
+                  <h6 class="mt-2">Subtitle</h6>
+                  <p class="mt-3" style="line-height: 30px">
+                    Nullam id dolor id nibh ultricies vehicula ut id elit.
+                    Cras justo odio, dapibus ac facilisis in, egestas eget
+                    quam. Donec id elit non mi porta gravida at eget metus.
+                  </p>
+                  <a href="page.html" class="btn rounded-pill btn-primary sub-btn mt-4 d-block">Submit Request</a>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card card-wrapper p-4 mt-5" style="height: 352px" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal">
+                  <h5>Traffic Violations</h5>
+                  <h6 class="mt-2">Subtitle</h6>
+                  <p class="mt-3" style="line-height: 30px">
+                    Nullam id dolor id nibh ultricies vehicula ut id elit.
+                    Cras justo odio, dapibus ac facilisis in, egestas eget
+                    quam. Donec id elit non mi porta gravida at eget metus.
+                  </p>
+                  <a href="page.html" class="btn rounded-pill btn-primary sub-btn mt-4 d-block">Submit Request</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+
+  <!-- Responsive Layout -->
+  <section class="responsive-content">
+    <section class="container-fluid card-p">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card card-wrapper" style="height: fit-content">
+            <h5>ID Card</h5>
+            <div class="bg-white" style="
+                  height: 75%;
+                  padding: 35px 0px;
+                  border: 1px solid rgba(0, 0, 0, 0.125);
+                  border-radius: 0.25rem;
+                  width: 75%;
+                  margin-top: 15px;
+                  border-radius: 20px;
+                ">
+              <div>
+                <img src="../assets/img/saudi-aramco-logo.png" alt="" style="width: 55%; margin-top: -35px" />
+              </div>
+              <div>
+                <img src="../assets/img/id card image.jpeg" alt="" style="width: 40%; height: 125px" />
+              </div>
+              <h2 class="card-text mt-3" style="color: #000">
+                احــمد محمد الحملي
+              </h2>
+              <h4 class="card-text" style="color: #000; font-size: 2rem">
+                AHMAD AL HEMELI
+              </h4>
+              <div class="col col-md-12 idcolor mt-2" style="background: #2828ff; height: 10px">
+                <label class="col-form-label"></label>
+              </div>
+              <div class="row mt-3" style="padding: 0 20px">
+                <div class="col">
+                  <p class="text-start" style="color: #000">CONSULTANT</p>
+                  <h6 class="text-start" style="color: #000">Badge No</h6>
+                </div>
+                <div class="col">
+                  <p class="text-end" style="color: #000">Expiry Date</p>
+                  <h6 class="text-start" style="color: var(--bs-red)">
+                    Expiry Date
+                  </h6>
+                </div>
+              </div>
+              <div class="row" style="padding: 0 20px">
+                <div class="col">
+                  <h4 class="text-start" style="color: #000">2329485</h4>
+                </div>
+                <div class="col">
+                  <h4 class="text-start" style="color: var(--bs-red)">
+                    06/30/2025
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <a href="page.html" class="btn rounded-pill btn-primary sub-btn" style="margin-top: 15px">Submit Request</a>
+            <!-- <img src="1.png" alt="" style="height: 100%" /> -->
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card card-wrapper mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <h5>Vehicle Sticker</h5>
+                <div class="swiper2 mySwiper" style="background: transparent">
+                  <div class="swiper-wrapper" style="background: transparent">
+                    <div class="swiper-slide" style="background: transparent">
+                      <!-- <img
+                                src="./saudi-white-number-plate.png"
+                                alt=""
+                              /> -->
+                      <div style="
+                            display: grid;
+                            grid-template-columns: 2fr 1.5fr;
+                            margin-left: 10px;
+                            height: 110px;
+                            border: 2px solid #000;
+                            border-radius: 10px;
+                            background-color: #fff;
+                          ">
+                        <div class="plate-grid-item">
+                          <p class="plate-txt">1511</p>
+                        </div>
+                        <div class="plate-grid-item">
+                          <p class="plate-txt" style="font-size: 20px; white-space: nowrap">
+                            د ع ا
+                          </p>
+                        </div>
+                        <div class="plate-grid-item">
+                          <p class="plate-txt">1511</p>
+                        </div>
+                        <div class="plate-grid-item">
+                          <p class="plate-txt" style="font-size: 20px; white-space: nowrap">
+                            A E D
+                          </p>
+                        </div>
+                        <div class="text-start plate-grid-item vertical-item">
+                          <img src="../assets/img/download.jpg" width="30px" height="30px" style="
+                                position: absolute;
+                                top: 20%;
+                                left: 50%;
+                                bottom: 50%;
+                                transform: translate(-50%, -50%);
+                              " /><span class="vertical-txt" style="
+                                top: 55%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                              ">KSA</span>
+                          <div style="
+                                width: 10px;
+                                height: 10px;
+                                background-color: black;
+                                border-radius: 50%;
+                                position: absolute;
+                                top: 85%;
+                                transform: translate(-50%, -50%);
+                              "></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="swiper-slide" style="background: transparent">
+                      <!-- <img
+                                src="./saudi-white-number-plate.png"
+                                alt=""
+                              /> -->
+                      <div style="
+                            display: grid;
+                            grid-template-columns: 2fr 1.5fr;
+                            margin-left: 10px;
+                            height: 110px;
+                            border: 2px solid #000;
+                            border-radius: 10px;
+                            background-color: #fff;
+                          ">
+                        <div class="plate-grid-item">
+                          <p class="plate-txt">1511</p>
+                        </div>
+                        <div class="plate-grid-item">
+                          <p class="plate-txt" style="font-size: 20px; white-space: nowrap">
+                            د ع ا
+                          </p>
+                        </div>
+                        <div class="plate-grid-item">
+                          <p class="plate-txt">1511</p>
+                        </div>
+                        <div class="plate-grid-item">
+                          <p class="plate-txt" style="font-size: 20px; white-space: nowrap">
+                            A E D
+                          </p>
+                        </div>
+                        <div class="text-start plate-grid-item vertical-item">
+                          <img src="../assets/img/download.jpg" width="30px" height="30px" style="
+                                position: absolute;
+                                top: 20%;
+                                left: 50%;
+                                bottom: 50%;
+                                transform: translate(-50%, -50%);
+                              " /><span class="vertical-txt" style="
+                                top: 55%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                              ">KSA</span>
+                          <div style="
+                                width: 10px;
+                                height: 10px;
+                                background-color: #000;
+                                border-radius: 50%;
+                                position: absolute;
+                                top: 85%;
+                                transform: translate(-50%, -50%);
+                              "></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="swiper-slide" style="background: transparent">
+                      <!-- <img
+                                src="./saudi-white-number-plate.png"
+                                alt=""
+                              /> -->
+                      <div style="
+                            display: grid;
+                            grid-template-columns: 2fr 1.5fr;
+                            margin-left: 10px;
+                            height: 110px;
+                            border: 2px solid #000;
+                            border-radius: 10px;
+                            background-color: #fff;
+                          ">
+                        <div class="plate-grid-item">
+                          <p class="plate-txt">1511</p>
+                        </div>
+                        <div class="plate-grid-item">
+                          <p class="plate-txt" style="font-size: 20px; white-space: nowrap">
+                            د ع ا
+                          </p>
+                        </div>
+                        <div class="plate-grid-item">
+                          <p class="plate-txt">1511</p>
+                        </div>
+                        <div class="plate-grid-item">
+                          <p class="plate-txt" style="font-size: 20px; white-space: nowrap">
+                            A E D
+                          </p>
+                        </div>
+                        <div class="text-start plate-grid-item vertical-item">
+                          <img src="../assets/img/download.jpg" width="30px" height="30px" style="
+                                position: absolute;
+                                top: 20%;
+                                left: 50%;
+                                bottom: 50%;
+                                transform: translate(-50%, -50%);
+                              " /><span class="vertical-txt" style="
+                                top: 55%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                              ">KSA</span>
+                          <div style="
+                                width: 10px;
+                                height: 10px;
+                                background-color: #000;
+                                border-radius: 50%;
+                                position: absolute;
+                                top: 85%;
+                                transform: translate(-50%, -50%);
+                              "></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <a href="page.html" class="btn rounded-pill btn-primary sub-btn">Submit Request</a>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card card-wrapper mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <img src="../assets/img/my.png" alt="" style="height: 100%" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card card-wrapper  mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <h4>My Access</h4>
+                <h3>6</h3>
+                <p>Request</p>
+                <a href="page.html" class="btn rounded-pill btn-primary sub-btn">Submit Request</a>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card card-wrapper mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <h4>VMS</h4>
+                <h3>2</h3>
+                <p>Request</p>
+                <a href="page.html" class="btn rounded-pill btn-primary sub-btn">Submit Request</a>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card card-wrapper mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <h4>Unsafe Practices</h4>
+                <h3>0</h3>
+                <p>Trafic Violation</p>
+                <a href="page.html" class="btn rounded-pill btn-primary sub-btn">Submit Request</a>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card card-wrapper mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <h4>Digital Stickers</h4>
+                <h3>0</h3>
+                <p>Requesters</p>
+                <a href="page.html" class="btn rounded-pill btn-primary sub-btn">Submit Request</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- Table Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" id="agGrid-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="ui button green primary">Analyze Data</button>
+          <button class="ui button green primary">Export</button>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"
+            id="modal-close-btn"></button>
+        </div>
+        <div class="modal-body">
+          <div id="myGrid" style="height: 80vh; width: 80vw" class="ag-theme-quartz-dark"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ag Grid Form -->
+  <div class="modal fade" id="agGridFormModal" tabindex="-1" aria-labelledby="agGridFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" id="agGrid-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"
+            id="modal-close-btn"></button>
+        </div>
+        <div class="modal-body">
+          <form class="ui modal form">
+            <h4 class="ui dividing header">Grid Settings</h4>
+            <div class="two fields">
+              <div class="field">
+                <div class="ui toggle checkbox">
+                  <input type="checkbox" name="advanced_filtering" tabindex="0" class="hidden" />
+                  <label>Advanced Filtering</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui toggle checkbox">
+                  <input type="checkbox" name="rowgrouping" tabindex="0" class="hidden" />
+                  <label>Allow Grouping</label>
+                </div>
+              </div>
+            </div>
+            <div class="two fields">
+              <div class="field">
+                <div class="ui toggle checkbox">
+                  <input type="checkbox" name="Pagenation" tabindex="0" class="hidden" />
+                  <label>Pagenation</label>
+                </div>
+              </div>
+              <div class="field">
+                <label>Page Size</label>
+                <input name="page_size" type="number" disabled min="10" max="1000" />
+              </div>
+            </div>
+            <div class="field">
+              <label> Panel </label>
+              <select multiple="" class="ui dropdown">
+                <option value="agTotalAndFilteredRowCountComponent">
+                  TotalAndFilteredRowCountComponent
+                </option>
+                <option value="agTotalRowCountComponent">
+                  TotalRowCountComponent
+                </option>
+                <option value="agFilteredRowCountComponent">
+                  FilteredRowCountComponent
+                </option>
+                <option value="agSelectedRowCountComponent">
+                  SelectedRowCountComponent
+                </option>
+                <option value="agAggregationComponent">
+                  AggregationComponent
+                </option>
+              </select>
+            </div>
+            <button class="ui positive button labeled icon" type="button">
+              <i class="share icon"></i>
+              Apply
+            </button>
+            <button class="ui positive button labeled icon" type="button">
+              <i class="save icon"></i>
+              Save
+            </button>
+            <button class="ui reset negative button labeled icon" type="button">
+              <i class="undo icon"></i>
+              Reset
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login Form Modal -->
+  <div class="modal fade" id="loginFormModal" tabindex="-1" aria-labelledby="loginFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span style="font-size: 30px">Login</span>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"
+            id="modal-close-btn"></button>
+        </div>
+        <div class="modal-body">
+          <form class="ui form">
+            <div class="field">
+              <label for="email" style="font-size: 30px">Email</label>
+              <div class="ui left icon input">
+                <i class="envelope icon"></i>
+                <input type="text" id="email" placeholder="example@gmail.com" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="password" style="font-size: 30px">Password</label>
+              <div class="ui left icon input">
+                <i class="key icon"></i>
+                <input type="password" id="password" placehFolder="******" />
+              </div>
+            </div>
+            <div class="two fields">
+              <div class="field">
+                <div class="ui checkbox">
+                  <input type="checkbox" id="rememberMe" />
+                  <label for="rememberMe" style="font-size: 25px; margin-left: 0 !important">Remember me</label>
+                </div>
+              </div>
+              <div class="field" style="text-align: right">
+                <a href="#" style="font-size: 25px">Forget password?</a>
+              </div>
+            </div>
+            <div class="field">
+              <button class="ui red button">
+                <i class="google icon"></i> Google
+              </button>
+              <button class="ui black button">
+                <i class="apple icon"></i> Apple
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Template Customizer -->
+  <div class="template-customizer"><i class="fa-solid fa-gear"></i></div>
+  <div class="body-drop-shadow"></div>
+
+  <div class="customizer">
+    <div class="template-customizer-box">
+      <ul>
+        <li class="icons"><i class="fa-solid fa-moon"></i></li>
+        <li class="icons2"><i class="fa-solid fa-sun"></i></li>
+        <li style="font-size: 1.5rem">
+          <button class="ui button" data-bs-toggle="modal" data-bs-target="#agGridFormModal" style="width: fit-content">
+            Grid Settings
+          </button>
+        </li>
+        <li style="font-size: 1.5rem">
+          <button class="ui button" style="width: fit-content" data-bs-toggle="modal" data-bs-target="#loginFormModal">
+            Email Setting
+          </button>
+        </li>
+        <!-- <li style="font-size: 1.5rem">
+                      <button class="ui button" style="width: fit-content" data-bs-toggle="modal"
+                        data-bs-target="#impersonationFormModal">
+                        Impersonation
+                      </button>
+                    </li> -->
+      </ul>
+      <div class="close-customizer"><i class="fa-solid fa-xmark"></i></div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <!-- <script src="/Personal View/script.js"></script> -->
+  <script src="./assets/js/bootstrap-5.0.2.min.js"></script>
+  <script src="./assets/js/swiper-bundle.min.js"></script>
+  <script src="https://d3js.org/d3.v6.js"></script>
+
+  <!-- <script src="../assets/js/ag-grid-community.min.js"></script> -->
+  <script src="/Personal View/script.js"></script>
+  <script src="./assets/js/chart.js"></script>
+  <script src="./assets/js/chartjs-chart-wordcloud.js"></script>
+  <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
+  <script>
+    function toggleActiveCard() {
+      var activeCard = document.getElementById('activeCard');
+      var baubleCheck = document.getElementById('bauble_check');
+
+      if (baubleCheck.checked) {
+        activeCard.style.display = 'flex';
+      } else {
+        activeCard.style.display = 'none';
+      }
+    }
+
+    // Add this event listener to ensure the function runs when the checkbox is clicked
+    document.getElementById('bauble_check').addEventListener('change', toggleActiveCard);
+
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        document.querySelector('.wrapper').classList.add('hidden');
+      }, 5000);
+    });
+    var charts = {}
+  </script>
+  <script src="./assets/js/script.js"></script>
+  <script src="./assets/js/responsive-chart.js"></script>
+  <!-- <script src="../assets/js/agrid.js"></script> -->
+
+  <script>
+
+
+    document.querySelector('.VMS_ISO_CPH').parentNode.style.display = 'None'
+    var get_default_gridOptions = () => {
+      return {
+        // Row Data: The data to be displayed.
+        statusBar: {
+          statusPanels: [{
+            statusPanel: "agTotalAndFilteredRowCountComponent"
+          }, {
+            statusPanel: "agTotalRowCountComponent"
+          }, {
+            statusPanel: "agFilteredRowCountComponent"
+          }, {
+            statusPanel: "agSelectedRowCountComponent"
+          }, {
+            statusPanel: "agAggregationComponent"
+          },],
+        },
+        enableAdvancedFilter: true,
+        pagination: true,
+        paginationPageSize: 10,
+        paginationPageSizeSelector: [10, 20, 50, 100],
+        defaultColDef: {
+          editable: false,
+          filter: true,
+          enableRowGroup: true,
+          flex: 1,
+          minWidth: 190,
+        },
+        rowGroupPanelShow: "always",
+      };
+    };
+
+    var gridOptions = get_default_gridOptions();
+    // document.querySelector(".showmodal").onclick = () => {
+    //   $(".ui.modal").modal("show");
+    // };
+    $(".ui.dropdown").dropdown({
+      clearable: true,
+      placeholder: "any",
+    });
+    $(".ui.checkbox").checkbox();
+
+    document.querySelector('input[name="advanced_filtering"]').onchange = (
+      event
+    ) => {
+      console.log(
+        "Changed Value of advanced_filtering",
+        document.querySelector('input[name="advanced_filtering"]').checked
+      );
+      grid.setGridOption(
+        "enableAdvancedFilter",
+        document.querySelector('input[name="advanced_filtering"]').checked
+      );
+    };
+    document.querySelector('input[name="rowgrouping"]').onchange = (
+      event
+    ) => {
+      gridOptions.defaultColDef.enableRowGroup = document.querySelector(
+        'input[name="rowgrouping"]'
+      ).checked;
+      gridOptions.rowGroupPanelShow = document.querySelector(
+        'input[name="rowgrouping"]'
+      ).checked ?
+        "always" :
+        "never";
+      grid.updateGridOptions(gridOptions);
+      console.log(
+        "Changed Value of rowgrouping",
+        document.querySelector('input[name="rowgrouping"]').checked
+      );
+    };
+    document.querySelector('input[name="page_size"]').disabled = !document.querySelector('input[name="Pagenation"]').checked;
+    document.querySelector('input[name="Pagenation"]').onchange = (event) => {
+      document.querySelector('input[name="page_size"]').disabled = !document.querySelector('input[name="Pagenation"]').checked;
+      gridOptions.pagination = document.querySelector(
+        'input[name="Pagenation"]'
+      ).checked;
+      grid.updateGridOptions(gridOptions);
+    };
+    document.querySelector('input[name="page_size"]').onchange = (event) => {
+      console.log(event);
+      console.log(gridOptions.paginationPageSize);
+      gridOptions.pagination = document.querySelector(
+        'input[name="Pagenation"]'
+      ).checked;
+      if (document.querySelector('input[name="Pagenation"]').checked) {
+        var multipliers = [1, 2, 5, 10];
+        gridOptions.paginationPageSizeSelector = multipliers.map(
+          (i) => document.querySelector('input[name="page_size"]').value * i
+        );
+
+        gridOptions.paginationPageSize = parseInt(
+          document.querySelector('input[name="page_size"]').value
+        );
+      }
+      grid.updateGridOptions(gridOptions);
+    };
+
+    document.querySelector(".ui.dropdown").onchange = () => {
+      const values = [...document.querySelector(".ui.dropdown").children]
+        .map((x) => x.dataset.value)
+        .filter((x) => x !== undefined)
+        .map((value) => {
+          return {
+            statusPanel: value
+          };
+        });
+      gridOptions.statusBar.statusPanels = values;
+      grid.updateGridOptions(gridOptions);
+      console.log(values);
+    };
+    document.querySelector(".reset.button.ui").onclick = () => {
+      console.log("clicked reset button");
+      gridOptions = get_default_gridOptions();
+      grid.updateGridOptions(gridOptions);
+    };
+
+    const myGridElement = document.querySelector("#myGrid");
+    var grid = agGrid.createGrid(myGridElement, gridOptions);
+    var update_grid = (raw_data) => {
+      console.log("called update_grid with ", raw_data)
+      if (raw_data.length > 0) {
+        gridOptions.columnDefs = Object.keys(raw_data[0]).map((x) => {
+          return {
+            field: x
+          };
+        });
+        gridOptions.rowData = raw_data;
+
+        grid.updateGridOptions(gridOptions);
+      } else {
+        // alert("No Data Found");
+        gridOptions.columnDefs = []
+        gridOptions.rowData = []
+        grid.updateGridOptions(gridOptions)
+
+        return;
+      }
+    };
+    var privilege = {
+      "11+": '#4ab636',
+      "3-8": '#138cd4',
+      "9&10": '#138cd4',
+      "NCF": '#d4b213'
+
+    }
+    var view_data = {};
+
+    function populate_personal_view(data) {
+      view_data["personal_view"] = data
+      let employee_id = data.network_active_id[0]
+      console.log(employee_id)
+      //id card
+      document.querySelector('.arabic_name').innerHTML = employee_id.ARABIC_NAME
+      document.querySelector('.english_name').innerHTML = employee_id.ENGLISH_NAME
+      document.querySelector('.idcolor').style.background = privilege[employee_id.PRIVILEGE]
+      document.querySelector('.card_title').innerHTML = employee_id.CARD_TITLE
+      document.querySelector('.expiry_date').innerHTML = employee_id.CARD_EXPIRY
+      document.querySelector('.badge_number').innerHTML = employee_id.BADGE_NUMBER
+      document.querySelector('.arabic_card_title').innerHTML = employee_id.CARD_TITLE_ARABIC
+      document.querySelector('.employee_photo').src = data.photo[0].photo
+      //stickers
+      document.querySelector('.swiper2 .swiper-wrapper ').innerHTML = ''
+      data.vehicle_stickers.forEach(plate => {
+        let english_plate = plate["PLATE_NUMBER_EN"]
+        let first_space = english_plate.indexOf(" ")
+        let arabic_plate = plate["PLATE_NUMBER_AR"]
+        let ar_first_space = arabic_plate.lastIndexOf(" ")
+        console.log("english Characters", english_plate.substring(0, first_space))
+        console.log("english Numbers", english_plate.substring(first_space))
+        console.log("arabic Characters", arabic_plate.substring(0, ar_first_space))
+        console.log("arabic Numbers", arabic_plate.substring(ar_first_space))
+        var plate_item = document.createElement('div')
+        var plate_template = ` <div               class="swiper-slide"               style="background: transparent"              >               <!-- <img                src="./saudi-white-number-plate.png"                alt=""               /> -->               <div                style="                 display: grid;                 grid-template-columns: 2fr 1.5fr;                 margin-left: 10px;                 height: 110px;                 border: 2px solid #000;                 border-radius: 10px;                 background-color: #fff;                "                class="h-fit-plate"               >                <div class="plate-grid-item">                 <p class="plate-txt arabic-number">1511</p>                </div>                <div class="plate-grid-item">                 <p                  class="plate-txt arabic-text"                  style="font-size: 20px; white-space: nowrap"                 >                  د ع ا                 </p>                </div>                <div class="plate-grid-item">                 <p class="plate-txt english-number">1511</p>                </div>                <div class="plate-grid-item">                 <p                  class="plate-txt english-text"                  style="font-size: 20px; white-space: nowrap"                 >                  A E D                 </p>                </div>                <div                 class="text-start plate-grid-item vertical-item"                >                 <img                  src="../assets/img/download.jpg"                  width="15px"                  height="15px"                  style="                   position: absolute;                   top: 20%;                   left: 50%;                   bottom: 50%;                   transform: translate(-50%, -50%);                  "                 /><span                  class="vertical-txt"                  style="                   top: 55%;                   left: 50%;                   transform: translate(-50%, -50%);                  "                  >KSA</span                 >                 <div                  style="                   width: 10px;                   height: 10px;                   background-color: black;                   border-radius: 50%;                   position: absolute;                   top: 85%;                   transform: translate(-50%, -50%);                  "                 ></div>                </div>               </div> `
+        plate_item.innerHTML = plate_template
+        //arabic-text arabic-number english-text english-number
+        plate_item.querySelector('.arabic-text').innerHTML = arabic_plate.substring(0, ar_first_space)
+        plate_item.querySelector('.arabic-number').innerHTML = arabic_plate.substring(ar_first_space)
+        plate_item.querySelector('.english-text').innerHTML = english_plate.substring(0, first_space)
+        plate_item.querySelector('.english-number').innerHTML = english_plate.substring(first_space)
+        document.querySelector('.swiper2 .swiper-wrapper').innerHTML += plate_item.innerHTML
+
+      })
+
+      let swiper2 = new Swiper(".swiper2", {
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
+        direction: "horizontal",
+        mousewheel: true,
+        slidePreView: 1,
+      });
+      var non_values = ["network_active_id", "vehicle_stickers", "photo"]
+      var list_values = Object.keys(data).filter(x => !non_values.includes(x))
+      //populate values
+
+      list_values.forEach((value) => {
+        console.log("populatting value", value)
+        document.querySelector(`.${value} .value`).innerHTML = data[value].length
+
+
+      })
+
+      //
+
+
+
+
+
+    }
+
+    function populate_traffic_org_view(data) {
+      //chart1 violation_by_employee_type chart
+      view_data["traffic_org"] = data
+      charts["Chart1"].data.labels = data.orgcode_employeetype.map(x => x["violator_type"])
+      charts["Chart1"].data.datasets[0].label = "Number of Violations"
+      charts["Chart1"].data.datasets[0].data = data.orgcode_employeetype.map(x => x["total"])
+      charts["Chart1"].update()
+
+      //chart yearly weekly violations statistics org org_violations_year
+      var year = new Date().getFullYear()
+      document.querySelector(".org_violations_year").innerHTML = `${year - 1}/${year}`
+      charts["Chart2"].data.labels = Array(Math.max(...data.orgcode_weekly.map(i => parseInt(i.week)))).fill(0).map((value, index) => index + 1)
+      charts["Chart2"].data.datasets[0].label = year - 1
+      charts["Chart2"].data.datasets[1].label = year
+      charts["Chart2"].data.datasets[0].data = data.orgcode_weekly.filter(row => row["year"] == year - 1).map(x => x.total)
+      charts["Chart2"].data.datasets[1].data = data.orgcode_weekly.filter(row => row["year"] == year).map(x => x.total)
+      charts["Chart2"].update()
+      //chart violations by Organizations
+      charts["Chart3"].data.labels = [...new Set(data.first_child.map(x => x.orgname))]
+      charts["Chart3"].data.datasets[0].label = year - 1
+      charts["Chart3"].data.datasets[1].label = year
+      charts["Chart3"].data.datasets[0].data = data.first_child.filter(row => row["year"] == year - 1).map(x => x.total)
+      charts["Chart3"].data.datasets[1].data = data.first_child.filter(row => row["year"] == year).map(x => x.total)
+      charts["Chart3"].update()
+
+
+    }
+
+    function populate_traffic_security_view(data) {
+      //chart1 violation_by_employee_type chart
+      view_data["traffic_security"] = data
+      //ISO Org # violations
+      charts["Chart4"].data.labels = [...new Set(data.orgcode_iso_area)].map(x => x.org_title)
+      charts["Chart4"].data.datasets[0].label = "Number of Violations"
+      charts["Chart4"].data.datasets[0].data = [...new Set(data.orgcode_iso_area)].map(x => x.total)
+      charts["Chart4"].update()
+      //ISO by Security Man 
+      charts["Chart5"].data.datasets[0].label = "Number of Issued Violations"
+      charts["Chart5"].data.labels = data.orgcode_iso_officers.sort((a, b) => b.total - a.total).slice(0, 5).map(x => x.SecurityManname)
+      charts["Chart5"].data.datasets[0].data = data.orgcode_iso_officers.sort((a, b) => b.total - a.total).slice(0, 5).map(x => x.total)
+      charts["Chart5"].update()
+      //Violations by location 
+      charts["Chart6"].data.labels = data.orgcode_iso_locations.map(x => x.area)
+      charts["Chart6"].data.datasets[0].label = "Number of Violations"
+      charts["Chart6"].data.datasets[0].data = data.orgcode_iso_locations.map(x => x.total)
+      charts["Chart6"].update()
+      //violations by violator type
+      charts["Chart7"].data.labels = data.orgcode_iso_type.map(x => x.violator_type)
+      charts["Chart7"].data.datasets[0].label = "Number of Violations"
+      charts["Chart7"].data.datasets[0].data = data.orgcode_iso_type.map(x => x.total)
+      charts["Chart7"].update()
+
+
+
+    }
+
+    function populate_plant_owner_view(data) {
+      //set cards
+      view_data["plant_owner"] = data
+      document.querySelector('.plant_owner_org .authorized_employees').innerHTML = [...new Set(data.restricted_access.map(x => x.BADGE_NUMBER))].length.toLocaleString()
+      document.querySelector('.plant_owner_org .vms .value').innerHTML = data.restricted_vms.length.toLocaleString()
+      document.querySelector('.plant_owner_org .mgps .value').innerHTML = data.restricted_mgps.length.toLocaleString()
+      document.querySelector('.plant_owner_org .inside').innerHTML = [...new Set(data.currently_inside.map(x => x.badge_no))].length.toLocaleString()
+      document.querySelector('.plant_owner_org .contractors').innerHTML = data.orgcode_type.filter(x => x.GROUP_DESCRIPTION == 'Contractor Personnel').map(x => x.COUNT)[0]
+      document.querySelector('.plant_owner_org .smps').innerHTML = data.orgcode_type.filter(x => x.GROUP_DESCRIPTION == 'SMP').map(x => x.COUNT)[0]
+      document.querySelector('.plant_owner_org .employees').innerHTML = data.orgcode_type.filter(x => x.GROUP_DESCRIPTION == 'Employee').map(x => x.COUNT)[0]
+      //top employee groups
+      document.querySelector('.plant_owner_org .orgs .value').innerHTML = data.restricted_departments.sort((a, b) => b.TOTAL_NUMBER - a.TOTAL_NUMBER).slice(0, 5).map(x => x.DEPARTMENTS + "-" + x.TOTAL_NUMBER).reduce((a, b) => a + "<br>" + b)
+      document.querySelector('.plant_owner_org .vendors .value').innerHTML = data.restricted_vendors.sort((a, b) => b.TOTAL_NUMBER - a.TOTAL_NUMBER).slice(0, 5).map(x => x.VENDOR + "-" + x.TOTAL_NUMBER).reduce((a, b) => a + "<br>" + b)
+
+      //update charts
+      //authroized employee count chart
+      charts["Chart8"].data.labels = data.orgcode_type.map(x => x.GROUP_DESCRIPTION)
+      charts["Chart8"].data.datasets[0].label = "Number of Personnel"
+      charts["Chart8"].data.datasets[0].data = data.orgcode_type.map(x => x.COUNT)
+      charts["Chart8"].update()
+      //inside count chart 
+      charts["Chart9"].data.labels = data.currently_inside_type.map(x => x.employee_type)
+      charts["Chart9"].data.datasets[0].label = "Number of Personnel"
+      charts["Chart9"].data.datasets[0].data = data.currently_inside_type.map(x => x.total)
+      charts["Chart9"].update()
+
+
+
+
+
+
+    }
+    var groupBy = function (xs, key) {
+      return xs.reduce(function (rv, x) {
+        (rv[x[key]] = rv[x[key]] || []).push(x);
+        return rv;
+      }, {});
+    };
+
+    function populate_restricted_access_view(data) {
+
+      view_data["restricted_org"] = data
+      //wordcloud 
+      const max_font_size = 45
+      const max_size_value = Math.max(...data.orgcode_plants_code.map(x => x.TOTAL))
+      charts["wordCloud1"].data.labels = data.orgcode_plants_code.map(x => x.CODE)
+      charts["wordCloud1"].data.datasets[0].data = data.orgcode_plants_code.map(x => x.TOTAL).map(x => x / max_size_value * max_font_size)
+      charts["wordCloud1"].data.datasets[0]["Count"] = data.orgcode_plants_code.map(x => x.TOTAL)
+      charts["wordCloud1"]["options"]["plugins"] = {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          callbacks: {
+            label: (item) => `${item.label}:${item.dataset.Count[item.dataIndex]}`
+          }
+        }
+      }
+      charts["wordCloud1"].update()
+      //labels
+      document.querySelector('.authorized_access .authorized .value').innerHTML = [...new Set(data.orgcode.map(x => x.BADGE_NUMBER))].length.toLocaleString()
+      document.querySelector('.authorized_access .orgcode_expiring_next_month .value').innerHTML = data.orgcode_expiring_next_month[0]["PERCENTAGE"] + "%"
+      document.querySelector('.authorized_access .orgcode_top_org .value').innerHTML = data.orgcode_top_org.sort((a, b) => b.TOTAL - a.TOTAL).slice(0, 5).map(x => x.ORG_TITLE + "-" + x.TOTAL).reduce((a, b) => a + b + "<br>", "")
+      document.querySelector('.authorized_access .orgcode_top_vendor .value').innerHTML = data.orgcode_top_vendor.sort((a, b) => b.TOTAL - a.TOTAL).slice(0, 5).map(x => x.VENDOR_NAME + "-" + x.TOTAL).reduce((a, b) => a + b + "<br>", "")
+
+      //charts 
+      //employee_type chart
+      charts["Chart10"].data.labels = data.orgcode_type.map(x => x.GROUP_DESCRIPTION)
+      charts["Chart10"].data.datasets[0].label = "Number of Personnel"
+      charts["Chart10"].data.datasets[0].data = data.orgcode_type.map(x => x.COUNT)
+      charts["Chart10"].update()
+
+      //last_time_utilized chart
+      var results = groupBy(data.orgcode_last_utilized, "class")
+      charts["Chart34"].data.labels = Object.keys(results)
+      charts["Chart34"].data.datasets[0].label = "Number of Personnel"
+      charts["Chart34"].data.datasets[0].data = Object.values(results).map(x => x.length)
+      charts["Chart34"].update()
+
+
+
+    }
+
+    function populate_security_view(data) {
+
+      view_data["plant_security"] = data
+      //wordcloud 
+      const max_font_size = 45
+      const max_size_value = Math.max(...data.orgcode_plants.map(x => x.total))
+      charts["wordCloud2"].data.labels = data.orgcode_plants.map(x => x.plant_name)
+      charts["wordCloud2"].data.datasets[0].data = data.orgcode_plants.map(x => x.total).map(x => x / max_size_value * max_font_size)
+      charts["wordCloud2"].data.datasets[0]["Count"] = data.orgcode_plants.map(x => x.total)
+      charts["wordCloud2"]["options"]["plugins"] = {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          callbacks: {
+            label: (item) => `${item.label}:${item.dataset.Count[item.dataIndex]}`
+          }
+        }
+      }
+      charts["wordCloud2"].update()
+
+
+
+
+    }
+
+    function populate_mgps_org(data) {
+      //mgps_org 
+      view_data["mgps_org"] = data
+      document.querySelector('.approved_mgps .value').innerHTML = parseInt(data.org_unexecuted_approved_gatepass_count[0]["TOTAL"]).toLocaleString()
+
+
+      //chart 11 mgps org breakdown by month
+      charts["Chart11"].data.labels = data.org_requests_YTD.map(x => x.MONTH)
+      charts["Chart11"].data.datasets[0].label = "Number of MGPS Requests"
+      charts["Chart11"].data.datasets[0].data = data.org_requests_YTD.map(x => x.TOTAL)
+      charts["Chart11"].update()
+
+      //chart 12 mgps org breakdown by suborg
+      charts["Chart12"].data.labels = data.org_issuer_org.map(x => x.org_title)
+      charts["Chart12"].data.datasets[0].data = data.org_issuer_org.map(x => x.total)
+      charts["Chart12"].data.datasets[0].label = "Number of MGPS Requests"
+      charts["Chart12"].update()
+
+
+      //chart 13 MGPS Request by Type
+      charts["Chart13"].data.labels = data.org_status.map(x => x.TYPE)
+      charts["Chart13"].data.datasets[0].label = "Number of MGPS Requests"
+      charts["Chart13"].data.datasets[0].data = data.org_status.map(x => x.TOTAL)
+      charts["Chart13"].update()
+
+
+      //chart 14 mgps request breakdown by area
+      charts["Chart14"].data.labels = data.org_area.map(x => x.AREA)
+      charts["Chart14"].data.datasets[0].label = "Number of MGPS Requests"
+      charts["Chart14"].data.datasets[0].data = data.org_area.map(x => x.TOTAL)
+      charts["Chart14"].update()
+
+
+
+    }
+
+    function populate_mgps_iso(data) {
+
+      view_data["mgps_iso"] = data
+
+      document.querySelector(".mgps_iso .emergency .value").innerHTML = data.iso_emergency_gatepasses.length.toLocaleString()
+      document.querySelector(".mgps_iso .approved .value").innerHTML = data.iso_unexecuted_approved_gatepass.length.toLocaleString()
+      //chart 15 mgps ytd breakdown by month
+      charts["Chart15"].data.labels = data.iso_requests_YTD.map(x => x.MONTH_NAME)
+      charts["Chart15"].data.datasets[0].label = "MGPS Requests"
+      charts["Chart15"].data.datasets[0].data = data.iso_requests_YTD.map(x => x.TOTAL)
+      charts["Chart15"].update()
+
+      //chart 17 business vs personal breakdown
+      charts["Chart17"].data.labels = data.ISO_business_personal.map(x => x.TYPE)
+      charts["Chart17"].data.datasets[0].label = "Number of MGPS Requests"
+      charts["Chart17"].data.datasets[0].data = data.ISO_business_personal.map(x => x.TOTAL)
+      charts["Chart17"].update()
+      //chart 16 breakdown by area
+      charts["Chart16"].data.labels = data.ISO_gate_YTD.map(x => x.area_description)
+      charts["Chart16"].data.datasets[0].data = data.ISO_gate_YTD.map(x => x.total)
+      charts["Chart16"].data.datasets[0].label = "Number of MGPS Requests"
+      charts["Chart16"].update()
+      //Chart 18 top executed per department 
+      charts["Chart18"].data.labels = data.ISO_executor_YTD.sort((a, b) => b.TOTAL - a.TOTAL).slice(0, 5).map(x => x.NAME)
+      charts["Chart18"].data.datasets[0].data = data.ISO_executor_YTD.sort((a, b) => b.TOTAL - a.TOTAL).slice(0, 5).map(x => x.TOTAL)
+      charts["Chart18"].data.datasets[0].label = "Number of Executed MGPS Requests"
+      charts["Chart18"].update()
+    }
+
+    function populate_vms_org(data) {
+
+      view_data["vms_org"] = data
+
+      //VMS Checkins ytd
+      charts["Chart19"].data.labels = data.org_checkins_ytd_per_month.map(x => x.MONTH)
+      charts["Chart19"].data.datasets[0].data = data.org_checkins_ytd_per_month.map(x => x.TOTAL_CHECKINS)
+      charts["Chart19"].data.datasets[0].label = "Total Checkins"
+      charts["Chart19"].update()
+
+      //vms Valid Requestes
+      document.querySelector(".vms_org .active_vms .value").innerHTML = data.org_approved_valid_visit_requests_total[0]['VALID_REQUESTS']
+
+      // most frequent visitors 
+      document.querySelector(".vms_org .freq_visitors .values").innerHTML = data.org_visitors_checkins_frequency.sort((a, b) => b.TOTAL - a.TOTAL).splice(0, 10).map(x => x.FIRST_NAME + " " + x.LAST_NAME + "-" + x.TOTAL).reduce((a, b) => a + b + "<br>", "")
+
+      charts["Chart20"].data.labels = data.org_area_gate.map(x => x.GATE)
+      charts["Chart20"].data.datasets[0].label = 'Number of Checkins'
+      charts["Chart20"].data.datasets[0].data = data.org_area_gate.map(x => x.CHECKINS)
+      charts["Chart20"].update()
+      //number of visits per org
+      data.org_visits_per_org = data.org_visits_per_org.sort((a, b) => b.total - a.total)
+      charts["Chart21"].data.labels = data.org_visits_per_org.map(x => x.orgtitle)
+      charts["Chart21"].data.datasets[0].label = "Number of visits"
+      charts["Chart21"].data.datasets[0].data = data.org_visits_per_org.map(x => x.total)
+      charts["Chart21"].update()
+
+
+    }
+
+    function populate_vms_iso(data) {
+
+      view_data["vms_iso"] = data
+      //total checkins YTD
+      charts["Chart22"].data.labels = data.ISO_Checkin_YTD.map(x => x.MONTH_NAME)
+      charts["Chart22"].data.datasets[0].label = "Number of Checkins"
+      charts["Chart22"].data.datasets[0].data = data.ISO_Checkin_YTD.map(x => x.TOTAL_CHECKINS)
+      charts["Chart22"].update()
+
+      //checkins by checkin method
+      charts['Chart33'].data.labels = data.ISO_Checkin_Method.map(x => x.CHECKIN_FROM)
+      charts['Chart33'].data.datasets[0].label = 'Total Checkins'
+      charts['Chart33'].data.datasets[0].data = data.ISO_Checkin_Method.map(x => x.TOTAL)
+      charts['Chart33'].update()
+
+
+
+      //Checkins by Gates & Visit type
+      charts['Chart23'].data.labels = data.ISO_Checkin_method_visit_type.map(x => {
+        return x.CHECKIN_FROM + "-" + x.VISIT_TYPE
+      })
+      charts['Chart23'].data.datasets[0].label = "Number of Checkins"
+      charts['Chart23'].data.datasets[0].data = data.ISO_Checkin_method_visit_type.map(x => x.TOTAL)
+      charts['Chart23'].update()
+
+
+
+      //valid_visits 
+      document.querySelector('.vms_iso .temporary_valid_visit .value').innerHTML = data.ISO_Valid_visit_type.filter(x => x.VISIT_TYPE == 'TEMPORARY').map(x => x.TOTAL).reduce((a, b) => a + parseInt(b), 0)
+      document.querySelector('.vms_iso .personal_valid_visit .value').innerHTML = data.ISO_Valid_visit_type.filter(x => x.VISIT_TYPE == 'PERSONAL').map(x => x.TOTAL).reduce((a, b) => a + parseInt(b), 0)
+
+      //Number of Checkins per Area
+      charts['Chart24'].data.labels = data.ISO_area.map(x => x.AREA_DESCRIPTION)
+      charts['Chart24'].data.datasets[0].data = data.ISO_area.map(x => x.TOTAL)
+      charts['Chart24'].data.datasets[0].label = 'Number of Checkins'
+      charts['Chart24'].update()
+
+      //Uncheckedout VMS requests
+      document.querySelector('.vms_iso .uncheckedout .value').innerHTML = data.ISO_uncheckedout.length.toLocaleString()
+
+      console.log(data)
+
+    }
+
+    function fetch_method(function_name, callback) {
+      return fetch(`https://supershadycornerman.pythonanywhere.com/${function_name}`, {
+        method: "GET",
+      }).then(response => response.json()).then(results => {
+
+        callback(results)
+
+
+      })
+    }
+    /*
+    "", "", "", "",
+        "vms_org", "", "", ""
+    
+    */
+    fetch_method("personal_view", populate_personal_view)
+
+    fetch_method("traffic_org", populate_traffic_org_view)
+    //
+    fetch_method("traffic_security", populate_traffic_security_view)
+    //
+    fetch_method("plant_owner", populate_plant_owner_view)
+    //
+    fetch_method("restricted_org", populate_restricted_access_view)
+    //
+    fetch_method("plant_security", populate_security_view)
+    //
+    fetch_method("mgps_org", populate_mgps_org)
+    //
+    fetch_method("mgps_iso", populate_mgps_iso)
+    //
+    fetch_method("vms_org", populate_vms_org)
+    //
+    // fetch_method("vms_iso", populate_vms_iso)
+
+    //add table update
+    document.querySelector('#exampleModal').addEventListener('show.bs.modal', (event) => {
+      console.log("customevent", event)
+      console.log("related_target", event.relatedTarget)
+      if (document.querySelector(".personal").contains(event.relatedTarget) && "personal_view" in view_data) {
+        let values = Object.keys(view_data["personal_view"]).filter(key => [...event.relatedTarget.classList].indexOf(key) >= 0)
+
+        console.log(values)
+        if (values && values.length > 0) {
+          update_grid(view_data["personal_view"][values[0]])
+        }
+      } else if (document.querySelector(".traffic_org").contains(event.relatedTarget) && "traffic_org" in view_data) {
+
+        update_grid(view_data["traffic_org"].orgcode)
+
+      } else if (document.querySelector(".traffic_security").contains(event.relatedTarget) && "traffic_security" in view_data) {
+
+        update_grid(view_data["traffic_security"].orgcode)
+
+      } else if (document.querySelector(".plant_owner_org").contains(event.relatedTarget) && "plant_owner" in view_data) {
+
+        if (document.querySelector(".row.restricted_access").contains(event.relatedTarget)) {
+          update_grid(view_data["plant_owner"].restricted_access)
+        } //mgps vms orgs vendors
+        else if (document.querySelector(".plant_owner_org .mgps").contains(event.relatedTarget)) {
+          update_grid(view_data["plant_owner"].restricted_mgps)
+        } else if (document.querySelector(".plant_owner_org .vms").contains(event.relatedTarget)) {
+          update_grid(view_data["plant_owner"].restricted_vms)
+        } else if (document.querySelector(".plant_owner_org .orgs").contains(event.relatedTarget)) {
+          update_grid(view_data["plant_owner"].restricted_departments)
+        } else if (document.querySelector(".plant_owner_org .vendors").contains(event.relatedTarget)) {
+          update_grid(view_data["plant_owner"].restricted_vendors)
+        }
+
+
+
+      } else if (document.querySelector(".authorized_access ").contains(event.relatedTarget) && "restricted_org" in view_data) {
+        if (document.querySelector(".authorized_access .orgcode").contains(event.relatedTarget)) {
+          update_grid(view_data["restricted_org"].orgcode)
+        } else if (document.querySelector(".authorized_access .authorized ").contains(event.relatedTarget)) {
+          update_grid(view_data["restricted_org"].orgcode)
+        } else if (document.querySelector(".authorized_access .employee_type ").contains(event.relatedTarget)) {
+          update_grid(view_data["restricted_org"].orgcode)
+        } else if (document.querySelector(".authorized_access .orgcode_last_utilized ").contains(event.relatedTarget)) {
+          update_grid(view_data["restricted_org"].orgcode_last_utilized)
+        } else if (document.querySelector(".authorized_access .orgcode_expiring_next_month ").contains(event.relatedTarget)) {
+          update_grid(view_data["restricted_org"].orgcode_last_utilized)
+        } else if (document.querySelector(".authorized_access .orgcode_top_org ").contains(event.relatedTarget)) {
+          update_grid(view_data["restricted_org"].orgcode_top_org)
+        } else if (document.querySelector(".authorized_access .orgcode_top_vendor ").contains(event.relatedTarget)) {
+          update_grid(view_data["restricted_org"].orgcode_top_vendor)
+        }
+      } else if (document.querySelector(".security_plant ").contains(event.relatedTarget) && "plant_security" in view_data) {
+        update_grid(view_data["plant_security"].orgcode)
+      } else if (document.querySelector(".mgps_org ").contains(event.relatedTarget) && "mgps_org" in view_data) {
+        if (document.querySelector(".mgps_org .mgps_ytd").contains(event.relatedTarget)) {
+          update_grid(view_data["mgps_org"].org)
+        } else if (document.querySelector(".mgps_org .approved_mgps").contains(event.relatedTarget)) {
+          update_grid(view_data["mgps_org"].org_unexecuted_approved_gatepass)
+        } else if (document.querySelector(".mgps_org .suborg").contains(event.relatedTarget)) {
+          update_grid(view_data["mgps_org"].org)
+        } else if (document.querySelector(".mgps_org .org_area").contains(event.relatedTarget)) {
+          update_grid(view_data["mgps_org"].org)
+        } else if (document.querySelector(".mgps_org .mgps_type").contains(event.relatedTarget)) {
+          update_grid(view_data["mgps_org"].org)
+        }
+
+      } else if (document.querySelector(".mgps_iso ").contains(event.relatedTarget) && "mgps_iso" in view_data) {
+        if (document.querySelector(".mgps_iso .approved").contains(event.relatedTarget)) {
+          update_grid(view_data["mgps_iso"].iso_unexecuted_approved_gatepass)
+        } else if (document.querySelector(".mgps_iso .emergency").contains(event.relatedTarget)) {
+          update_grid(view_data["mgps_iso"].iso_emergency_gatepasses)
+        } else if (document.querySelector(".mgps_iso .executor").contains(event.relatedTarget)) {
+          update_grid(view_data["mgps_iso"].ISO_executor_YTD)
+        } else {
+          update_grid(view_data["mgps_iso"].iso)
+        }
+      } else if (document.querySelector(".vms_org ").contains(event.relatedTarget) && "vms_org" in view_data) {
+        if (document.querySelector(".vms_org .active_vms").contains(event.relatedTarget)) {
+          update_grid(view_data["vms_org"].org_approved_valid_visit_requests)
+        } else if (document.querySelector(".vms_org .freq_visitors").contains(event.relatedTarget)) {
+          update_grid(view_data["vms_org"].org_visitors_checkins_frequency)
+        } else {
+          update_grid(view_data["vms_org"].org)
+        }
+
+      }
+    })
+  </script>
+
+</body>
+
+</html>

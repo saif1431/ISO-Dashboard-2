@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISO Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="sect1.css">
+    <link rel="shortcut icon" href="/images/Saqr logo 48.png" type="image/x-icon">
+    <link rel="stylesheet" href="operationalview.css">
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+    <style>
+        
+        .content-section {
+            display: none; 
+        }
+
+        .content-section.activ {
+            display: block; 
+        }
+
+    </style>
+</head>
+<body>
+    <div class="page1">
+        <div class="navbar">
+            <nav>
+                <img src="/images/Saqr logo 48.png" alt="Logo 1">
+                <img class="logo2" src="/images/logo2 (2).png" alt="Logo 2">
+            </nav>
+
+            <div class="nav2">
+                <div class="nav-links">
+                    <a href="/Personal.html">Personal View</a>
+                    <a class="active" href="#">Operational View</a>
+                </div>
+                <div class="btns">
+                    <p class="welcomeBtn">Welcome Afnan!</p>
+                    <div class="setting">
+                        <p class="date">August 28, 2024</p>
+                        <!-- <i class="ri-settings-2-line settingicon"></i> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+
+        <!-- First Section (Step 1) -->
+        <div class="content-section activ" data-item="1">
+            <p>Select Your Role</p>
+            <div class="Cards">
+                <div class="card1" data-next="2"> <!-- Clicking moves to Step 2 -->
+                    <img style="width: 25px;" class="info" src="./images/info.svg"  alt="">
+                    <h1>Company User</h1>
+                    <img src="/images/image 2551.png" alt="Company User Image">
+                </div>
+                <a class="card2" href="/ISO Personal/ISOPersonal.html">
+                    <!-- <div class="card2" data-next="3"> -->
+                        <img style="width: 25px;" class="info" src="./images/info.svg"  alt="">
+                        <h1>ISO Personal</h1>
+                        <img src="/images/Security Man 1.png" alt="ISO Personal Image">
+                    <!-- </div> -->
+                </a>
+            </div>
+        </div>
+
+        <!-- Second Section  -->
+        <div class="content-section" data-item="2">
+            <p>Select Your Role</p>
+            <div class="Cards">
+                <div class="card3" data-next="3"> <!-- Clicking moves to Step 3 -->
+                    
+                     <a href="/Company user/companyuser.html">Free Protection</a>
+                         <a href="">Loss
+                            Prevention</a>
+                    <a href="">Corporate Security</a>
+                </div>
+                <a class="card2" href="/ISO Personal/ISOPersonal.html">
+                    <!-- <div class="card2"> -->
+                        <img style="width: 25px;" class="info" src="./images/info.svg"  alt="">
+                        <h1>ISO Personal</h1>
+                        <img src="/images/Security Man 1.png" alt="ISO Personal Image">
+                    <!-- </div> -->
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

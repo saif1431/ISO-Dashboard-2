@@ -1,0 +1,3355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ISO Dashboard</title>
+    <link rel="shortcut icon" href="/images/Saqr logo 48.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="./assets/css/bootstrap-5.0.2.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+    <link rel="stylesheet" href="./assets/css/remixicon.css" />
+
+    <!-- AG Grid -->
+    <script src="./assets/js/agGrid/ag-grid-enterprise.js"></script>
+    <link rel="stylesheet" href="./assets/js/agGrid/semantic.css" />
+    <link rel="stylesheet" href="./assets/js/agGrid/main.css" />
+    <script src="./assets/js/agGrid/jquery-3.1.1.min.js"></script>
+    <script src="./assets/js/agGrid/semantic.js"></script>
+
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <!-- <link rel="stylesheet" href="/style.css"> -->
+    <!-- <link rel="stylesheet" href="/sect1.css"> -->
+    <style>
+       html, body {
+            overflow: auto;
+            height: auto;
+            min-height: 100%;
+        }
+    .swiper-slide{
+      display: none;
+    }
+    .active {
+      display: block; /* Only the selected graph will be visible */
+    }
+    nav{
+      border-bottom: 2px solid #0077c7;
+    }
+    .logos {
+      display: flex;
+      align-items: center;
+      padding-left: 2vw;
+      gap:2vw;
+    }
+    .logos img{
+      width: 3%;
+    }
+    .nav2{
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding-left: 2vw;
+}
+hr{
+      border: 1px solid #0077c7;
+      margin-bottom: 3vw; 
+}
+nav{
+  width: 100%;
+  background-color: var(--body-bgC-color);
+  color: var(--primary-text-color);
+  font-weight: none;
+}
+.nav-links a{
+text-decoration: none;
+color: var(--primary-text-color);
+font-size: 1.6vw;
+font-weight: 100;
+/* padding-left: 1vw; */
+}
+.activ{
+      /* font-weight: 500; */
+      padding: 1.2vw;
+      border-left: 2px solid #0077c7;
+      border-top-right-radius: 20px;
+      border-top-left-radius: 20px;
+      border-top:2px solid #0077c7;
+      border-right: 2px solid #0077c7;
+      background-color: var(--body-bg-color);
+      text-align: center;
+}
+.btns{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: .4vw;
+      padding-right: 2vw;
+      padding-bottom: .3vw;
+     
+    
+}
+.welcomeBtn{
+      font-size: 1.6vw;
+      font-weight: 600;
+      background:linear-gradient(to right, #0077c7, #0133a0);
+      padding: .3vw 1.3vw;
+      /* font-weight: 500; */
+      color: #fff;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+      border-top-right-radius: 20px;
+}.setting{
+      display: flex;
+      align-items: center;
+      gap: 1vw;
+}
+.date{
+      text-align: center;
+      background-color: #D4D4D4;
+      font-size: 1.2vw;
+      border-radius: 20px;
+      padding: .3vw .8vw;
+}
+.ISO{
+      background-color: #D9D9D9;
+      color: #222;
+      border-radius: 20px;
+      padding: .5vw 2vw;
+      /* font-weight: 200; */
+      position: relative;
+}
+.dot{
+      position: absolute;
+      top: 35%;
+      left: 10%;
+      width: 10px;
+      border-radius: 50%;
+      height: 10px;
+      background: linear-gradient(45deg,#0077c7, #0133a0);
+}
+
+.sipnner-container{
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99;
+  position: absolute;
+ inset: 0;
+}
+.loader-container{
+                  width: 95vw;
+                  height: 90vh;
+                  overflow-x: hidden;
+                  /* display: ; */
+                  /* background-color: red; */
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+            }
+            /* From Uiverse.io by JaydipPrajapati1910 */ 
+.loader {
+  width: 48px;
+  height: 48px;
+  margin: auto;
+  position: relative;
+}
+
+.loader:before {
+  content: '';
+  width: 48px;
+  height: 5px;
+  background: #999;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  border-radius: 50%;
+  animation: shadow324 0.5s linear infinite;
+}
+
+.loader:after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  background: rgb(61, 106, 255);
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 4px;
+  animation: jump7456 0.5s linear infinite;
+}
+
+@keyframes jump7456 {
+  15% {
+    border-bottom-right-radius: 3px;
+  }
+
+  25% {
+    transform: translateY(9px) rotate(22.5deg);
+  }
+
+  50% {
+    transform: translateY(18px) scale(1, .9) rotate(45deg);
+    border-bottom-right-radius: 40px;
+  }
+
+  75% {
+    transform: translateY(9px) rotate(67.5deg);
+  }
+
+  100% {
+    transform: translateY(0) rotate(90deg);
+  }
+}
+
+@keyframes shadow324 {
+
+  0%,
+    100% {
+    transform: scale(1, 1);
+  }
+
+  50% {
+    transform: scale(1.2, 1);
+  }
+}
+.hidden{
+  display: none;
+}
+@media screen and (width > 300px) and (width < 768px){
+  .nav-links a{
+    font-size: 4vw;
+  }
+  .logos img{
+    width: 13%;
+  }
+  .nav2{
+    margin-top: 6vw;
+  }
+  .btns{
+    display: none;
+  }
+  .activ{
+    padding: 4vw;
+  }
+  .ISO{
+    padding: 3vw 4vw;
+  }
+  .dot{
+    width: 7px;
+    height: 7px;
+    left: 5%;
+  }
+}
+
+    </style>
+</head>
+
+<body>
+
+  <!-- Navbar------------------ -->
+   <div class="sipnner-container">
+    <div class="loader"></div>
+   </div>
+  <nav>
+    <div class="logos">
+      <img src="/images/Saqr logo 48.png" alt="">
+      <img style="width: 5%;" src="/images/logo2 (2).png" alt="">
+    </div>
+
+    <div class="nav2">
+      <div class="nav-links">
+          <a  href="/Personal.html" >Personal View</a>
+          <a class="activ" href="/Personal View/operationalview.html">Operational View
+              <span class="ISO" id="nav-title">
+                    <span class="dot"></span>ISO Personal</span>
+              <span id="nav-card-title" class="ISO">
+                    <span class="dot"></span>Trafic Violation</span>
+          </a>
+          
+      </div>
+      <div class="btns">
+          <p class="welcomeBtn">Welcome Afnan!</p>
+          <div class="setting">
+              <p class="date">August 28, 2024</p>
+              <!-- <i class="ri-settings-2-line settingicon"></i> -->
+          </div>
+      </div>
+  </div>
+  </nav>
+<!-- <hr> -->
+    <!-- Slider Items -->
+  <div id="iso2">
+    <div class="swiper mySwiper">
+      <!-- <hr> -->
+        <div class="swiper-wrapper">
+            <div  class="swiper-slide personal">
+                <section class="d-flex justify-content-center">
+                    <div class="slider-name">Personal View</div>
+                    <div class="w-85">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="card card-wrapper network_active_id" style="height: 93vh">
+                                    <h5>ID Card</h5>
+                                    <div class="bg-white" style="
+                        height: 75%;
+                        padding: 35px 0px;
+                        border: 1px solid rgba(0, 0, 0, 0.125);
+                        border-radius: 0.25rem;
+                        width: 75%;
+                        margin-top: 15px;
+                        border-radius: 20px;
+                      ">
+                                        <div>
+                                            <img src="../assets/img/saudi-aramco-logo.png" alt="" style="width: 55%; margin-bottom:5vh ;margin-top: -35px" />
+                                        </div>
+                                        <div>
+                                            <img class="employee_photo" src="../assets/img/id card image.jpeg" alt="" style="width: 40%;" />
+                                        </div>
+                                        <h2 class="card-text arabic_name " style=" margin-top: 5vh!important;margin-bottom: 0.75vh!important;color: #000">
+                                            احــمد محمد الحملي
+                                        </h2>
+                                        <h4 class="card-text english_name" style="margin-bottom: 5vh !important;color: #000; font-size: 2rem">
+                                            AHMAD AL HEMELI
+                                        </h4>
+                                        <div class="col col-md-12 idcolor mt-2" style="background: #2828ff; height: 10px">
+                                            <label class="col-form-label"></label>
+                                        </div>
+                                        <div class="row mt-3" style="padding: 0 20px">
+                                            <div class="col">
+                                                <p class="text-start card_title" style="color: #000">
+                                                    CONSULTANT
+                                                </p>
+                                                <h6 class="text-start " style="color: #000">
+                                                    Badge No
+                                                </h6>
+                                            </div>
+                                            <div class="col">
+                                                <p class="text-end arabic_card_title" style="color: #000">
+                                                    Expiry Date
+                                                </p>
+                                                <h6 class="text-end" style="color: var(--bs-red)">
+                                                    Expiry Date
+                                                </h6>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="padding: 0 20px">
+                                            <div class="col">
+                                                <h4 class="text-start badge_number" style="color: #000">
+                                                    2329485
+                                                </h4>
+                                            </div>
+                                            <div class="col">
+                                                <h4 class="text-end expiry_date" style="color: var(--bs-red)">
+                                                    06/30/2025
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="page.html" class="btn rounded-pill btn-primary sub-btn" style="margin-top: 15px">Submit Request</a
+                    >
+                    <!-- <img src="1.png" alt="" style="height: 100%" /> -->
+                  </div>
+                </div>
+                <div class="col-md-7">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="card card-wrapper vehicle_stickers" style="height: 30vh">
+                        <h6>Vehicle Sticker</h6>
+                        <div
+                          class="swiper2 mySwiper mt-2"
+                          style="background: transparent"
+                        >
+                          <div
+                            class="swiper-wrapper"
+                            style="background: transparent"
+                          >
+                         
+                            <div
+                              class="swiper-slide"
+                              style="background: transparent"
+                            >
+                              <!-- <img
+                                src="./saudi-white-number-plate.png"
+                                alt=""
+                              /> -->
+                              <div
+                                style="
+                                  display: grid;
+                                  grid-template-columns: 2fr 1.5fr;
+                                  margin-left: 10px;
+                                  height: 110px;
+                                  border: 2px solid #000;
+                                  border-radius: 10px;
+                                  background-color: #fff;
+                                "
+                                class="h-fit-plate"
+                              >
+                                <div class="plate-grid-item">
+                                  <p class="plate-txt arabic-number">1511</p>
+                                </div>
+                                <div class="plate-grid-item">
+                                  <p
+                                    class="plate-txt arabic-text"
+                                    style="font-size: 20px; white-space: nowrap"
+                                  >
+                                    د ع ا
+                                  </p>
+                                </div>
+                                <div class="plate-grid-item">
+                                  <p class="plate-txt english-number">1511</p>
+                                </div>
+                                <div class="plate-grid-item">
+                                  <p
+                                    class="plate-txt english-text"
+                                    style="font-size: 20px; white-space: nowrap"
+                                  >
+                                    A E D
+                                  </p>
+                                </div>
+                                <div
+                                  class="text-start plate-grid-item vertical-item"
+                                >
+                                  <img
+                                    src="../assets/img/download.jpg"
+                                    width="15px"
+                                    height="15px"
+                                    style="
+                                      position: absolute;
+                                      top: 20%;
+                                      left: 50%;
+                                      bottom: 50%;
+                                      transform: translate(-50%, -50%);
+                                    "
+                                  /><span
+                                    class="vertical-txt"
+                                    style="
+                                      top: 55%;
+                                      left: 50%;
+                                      transform: translate(-50%, -50%);
+                                    "
+                                    >KSA</span
+                                  >
+                                  <div
+                                    style="
+                                      width: 10px;
+                                      height: 10px;
+                                      background-color: black;
+                                      border-radius: 50%;
+                                      position: absolute;
+                                      top: 85%;
+                                      transform: translate(-50%, -50%);
+                                    "
+                                  ></div>
+                                </div>
+                              </div>
+                            </div>
+                            <div
+                              class="swiper-slide"
+                              style="background: transparent"
+                            >
+                              <!-- <img
+                                src="./saudi-white-number-plate.png"
+                                alt=""
+                              /> -->
+                              <div
+                                style="
+                                  display: grid;
+                                  grid-template-columns: 2fr 1.5fr;
+                                  margin-left: 10px;
+                                  height: 110px;
+                                  border: 2px solid #000;
+                                  border-radius: 10px;
+                                  background-color: #fff;
+                                "
+                                class="h-fit-plate"
+                              >
+                                <div class="plate-grid-item">
+                                  <p class="plate-txt">1511</p>
+                                </div>
+                                <div class="plate-grid-item">
+                                  <p
+                                    class="plate-txt"
+                                    style="font-size: 20px; white-space: nowrap"
+                                  >
+                                    د ع ا
+                                  </p>
+                                </div>
+                                <div class="plate-grid-item">
+                                  <p class="plate-txt">1511</p>
+                                </div>
+                                <div class="plate-grid-item">
+                                  <p
+                                    class="plate-txt"
+                                    style="font-size: 20px; white-space: nowrap"
+                                  >
+                                    A E D
+                                  </p>
+                                </div>
+                                <div
+                                  class="text-start plate-grid-item vertical-item"
+                                >
+                                  <img
+                                    src="../assets/img/download.jpg"
+                                    width="15px"
+                                    height="15px"
+                                    style="
+                                      position: absolute;
+                                      top: 20%;
+                                      left: 50%;
+                                      bottom: 50%;
+                                      transform: translate(-50%, -50%);
+                                    "
+                                  /><span
+                                    class="vertical-txt"
+                                    style="
+                                      top: 55%;
+                                      left: 50%;
+                                      transform: translate(-50%, -50%);
+                                    "
+                                    >KSA</span
+                                  >
+                                  <div
+                                    style="
+                                      width: 10px;
+                                      height: 10px;
+                                      background-color: black;
+                                      border-radius: 50%;
+                                      position: absolute;
+                                      top: 85%;
+                                      transform: translate(-50%, -50%);
+                                    "
+                                  ></div>
+                                </div>
+                              </div>
+                            </div>
+                            
+                          </div>
+                        </div>
+                        <a
+                          href="page.html"
+                          class="btn rounded-pill btn-primary sub-btn"
+                          >Submit Request</a
+                        >
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="card card-wrapper" style="height: 30vh">
+                        <img
+                          src="../assets/img/my.png"
+                          alt=""
+                          style="height: 100%"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="card card-wrapper restricted_access mt-3" style="height: 30vh">
+                        <h5>My Access</h5>
+                        <h6 class="value">6</h6>
+                        <p>Request</p>
+                        <a
+                          href="page.html"
+                          class="btn rounded-pill btn-primary sub-btn"
+                          id="submitBtn"
+                          >Submit Request</a
+                        >
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div
+                        class="card card-wrapper vms mt-3"
+                        style="height: 30vh"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                      >
+                        <h5>VMS</h5>
+                        <h6 class="value">2</h6>
+                        <p>Request</p>
+                        <a
+                          href="page.html"
+                          class="btn rounded-pill btn-primary sub-btn"
+                          >Submit Request</a
+                        >
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div
+                        class="card card-wrapper traffic_violations mt-3"
+                        style="height: 30vh"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                      >
+                        <h5>Unsafe Practices</h5>
+                        <h6 class="value">0</h6>
+                        <p>Traffic Violation</p>
+                        <a
+                          href="page.html"
+                          class="btn rounded-pill btn-primary sub-btn"
+                          >Submit Request</a
+                        >
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div
+                        class="card card-wrapper mgps mt-3"
+                        style="height: 30vh"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                      >
+                        <h5>Material Gate Pass System</h5>
+                        <h6 class="value">0</h6>
+                        <p>Request</p>
+                        <a
+                          href="page.html"
+                          class="btn rounded-pill btn-primary sub-btn"
+                          >Submit Request</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div id="graph-7" class="swiper-slide traffic_org">
+          <section class="d-flex justify-content-center">
+
+            <div class="w-85">
+              <div class="row">
+                <div class="col-md-4">
+                  <div
+                    class="card card-wrapper p-2"
+                    style="height: 35vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <h5 class="pt-4">Violation By Employee Type</h5>
+                    <canvas class="Chart1 mt-2"></canvas>
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <div
+                    class="card card-wrapper p-2"
+                    style="height: 35vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <h5 class="pt-3"><span class="org_violations_year">2023/2024</span> Weekly Violations Statistics Org</h5>
+                    <canvas class="Chart2 mt-1"></canvas>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div
+                    class="card card-wrapper p-2 mt-4"
+                    style="height: 35vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <h5 class="pt-4">Violations By Childern Orgs</h5>
+                    <canvas width="2000" class="Chart3 mt-2"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div id="graph-1" class=" swiper-slide traffic_security" >
+          <section class="d-flex justify-content-center">
+            <!-- <div class="slider-name">Traffic Violations Security View</div> -->
+            <div class="w-85">
+              <div class="row">
+                <div class="col-md-6">
+                  <div
+                    class="card card-wrapper pt-2"
+                    style="height: 38vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <h5 class="pt-4">Violation By ISO Area</h5>
+                    <canvas style="width: 500px; display: block; box-sizing: border-box; height: 176px;" class="Chart4 mt-2" height="352" width="704"></canvas>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div
+                    class="card card-wrapper p-2"
+                    style="height: 38vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <h5 class="pt-4">Violations By ISO Officers</h5>
+                    <canvas  class="Chart5 mt-2"></canvas>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div
+                    class="card card-wrapper p-2 mt-4"
+                    style="height: 35vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <h5 class="pt-4">Violations By Locations</h5>
+                    <canvas class="Chart6 mt-1"></canvas>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div
+                    class="card card-wrapper p-2 mt-4"
+                    style="height: 35vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <h5 class="pt-4">Violations By Violator Type</h5>
+                    <canvas class="Chart7 mt-1"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div id="graph-8" class="swiper-slide plant_owner_org">
+          <section class="d-flex justify-content-center">
+            <!-- <div class="slider-name">Plant Owner CPH View</div> -->
+            <div class="w-85">
+              <div class="row mt-3">
+                <div class="col-md-6">
+                 
+                </div>
+                <div class="col-md-6"></div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row restricted_access">
+                    <div class="col-md-6">
+                      <div
+                        class="card card-wrapper p-4"
+                        style="height: 30vh"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                      >
+                        <h1 class="left-h1 authorized_employees">1260</h1>
+                        <h5 class="left-h5">Authorize Employees</h5>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div
+                        class="card card-wrapper p-5"
+                        style="height: 30vh"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                      >
+                        <h5>Plant Access by Type</h5>
+                        <canvas class="Chart8 mt-2"></canvas>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div
+                        class="card card-wrapper chart-img p-4 mt-4"
+                        style="height: 40vh"
+                      >
+                        <img src="../assets/img/id.jpg" alt="" />
+                        <h6 style="margin-top: 10px!important" class="employees">500</h6>
+                        <h6>Employees</h6>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div
+                        class="card card-wrapper chart-img p-4 mt-4"
+                        style="height: 40vh"
+                      >
+                        <img src="../assets/img/id.jpg" alt="" />
+                        <h6 style="margin-top: 10px !important" class="smps">260</h6>
+                        <h6>SMPS</h6>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div
+                        class="card card-wrapper chart-img p-4 mt-4"
+                        style="height: 40vh"
+                      >
+                        <img src="../assets/img/id.jpg" alt="" />
+                        <h6 style="margin-top: 10px !important" class="contractors">500</h6>
+                        <h6>Contractors</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div
+                            class="card card-wrapper p-4"
+                            style="
+                              height: 28vh;
+                              background-color: #3faa77;
+                              color: #fff;
+                              background-image: none;
+                            "
+                          >
+                            <h1 class="inside">1,001</h1>
+                            <p>currently in</p>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div
+                            class="card card-wrapper p-4 mt-3 orgs"
+                            style="height: 23vh"
+                          >
+                            <h5>Top Aramco Orgs</h5>
+                            <h6 class="mt-1 value" style="font-size: 1rem;"></h6>
+                         
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div
+                            class="card card-wrapper p-4 mt-3 vms"
+                            style="height: 18vh"
+                          >
+                            <h1 class="value">120</h1>
+                            <h6 class="mt-1">VMS</h6>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div
+                            class="card card-wrapper p-4"
+                            style="height: 28vh"
+                          >
+                            <h6>Currenly Inside Employee Distribution</h6>
+                            <canvas class="Chart9"></canvas>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div
+                            class="card card-wrapper p-4 mt-3 vendors"
+                            style="height: 23vh"
+                          >
+                            <h5>Top Vendors</h5>
+                            <h6 class="mt-1 value">Al Zamil co.</h6>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div
+                            class="card card-wrapper p-4 mt-3 mgps"
+                            style="height: 18vh"
+                          >
+                            <h1 class="value">155</h1>
+                            <h6 class="mt-1">MGPS</h6>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div id="graph-3" class="swiper-slide">
+          <section class="d-flex justify-content-center authorized_access">
+            <!-- <div class="slider-name">Restricted Access Organization View</div> -->
+            <div class="w-85">
+              <div class="row">
+                <div class="col-md-6">
+                  <div
+                    class="card card-wrapper orgcode"
+                    style="height: 74vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <div
+                      id="slide04-1"
+                      class="chart"
+                      style="height: 100%; width: 100%"
+                    >
+                       <h5>
+                        Active Restricted Access
+                      </h5> 
+                      <canvas
+                        class="chart canvas1"
+                        style="height: 495px !important"
+                      ></canvas>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div
+                            class="card card-wrapper p-4 authorized"
+                            style="
+                              height: 20vh;
+                              background-color: #3faa77;
+                              color: #fff;
+                              background-image: none;
+                            "
+                          >
+                            <h1 class="value">1,001</h1>
+                            <h5 class="mt-1" >
+                              Authorized Personnel
+                            </h5>
+                          </div>
+                        </div>
+
+                        <div class="col-md-12">
+                          <div
+                            class="card card-wrapper p-4 mt-3 orgcode_last_utilized"
+                            style="height: 25vh"
+                          >
+                            <h3>Last time utilized</h3>
+                            <canvas class="Chart34 mt-2"></canvas>
+                          </div>
+                        </div>
+
+                        <div class="col-md-12">
+                          <div
+                            class="card card-wrapper p-4 mt-3 orgcode_top_org"
+                            style="height: 23vh"
+                          >
+                            <h5>Top Organizations</h5>
+                            <h6 class="mt-1 value">Industrial Security Support</h6>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div
+                            class="card card-wrapper p-5 employee_type"
+                            style="height: 30vh"
+                          >
+                            <h5>Authorized Personnel by Employee Type</h5>
+                            <canvas class="Chart10 mt-2"></canvas>
+                          </div>
+                        </div>
+
+                        <div class="col-md-12">
+                          <div
+                            class="card card-wrapper p-4 mt-3 orgcode_expiring_next_month"
+                            style="height: 17vh"
+                          >
+                            <h1 class="value">52%</h1>
+                            <h6 class="mt-1">Expiring next month</h6>
+                          </div>
+                        </div>
+
+                        <div class="col-md-12">
+                          <div
+                            class="card card-wrapper p-4 mt-3 orgcode_top_vendor"
+                            style="height: 20vh"
+                          >
+                            <h5>Top Vendors</h5>
+                            <h6 class="mt-1 value">Al Zamil co.</h6>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div id="graph-2" class="swiper-slide">
+          <section class="d-flex justify-content-center iso_plant">
+            <!-- <div  class="slider-name">ISO Secuirty Plant View</div> -->
+            <div class="w-85">
+              <div class="row">
+                <div class="col-12">
+                  <div
+                    class="card card-wrapper p-4 security_plant"
+                    style="height: 94vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <div
+                      id="slide05"
+                      class="chart"
+                      style="height: 100%; width: 100%"
+                    >
+                      <h1>Personnel Currently Inside Plants</h1>
+                      <canvas class="chart canvas"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div id="graph-9" class="swiper-slide">
+          <section class="d-flex justify-content-center mgps_org">
+            <!-- <div class="slider-name">Material Gate Pass Organization View</div> -->
+            <div class="w-85">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="row">
+                    <div class="col-12">
+                      <div
+                        class="card card-wrapper p-5 mgps_ytd"
+                        style="height: 40vh"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                      >
+                        <h5>YTD MGPS Request Breakdown by Month</h5>
+                        <canvas class="Chart11"></canvas>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div
+                        class="card card-wrapper p-5 mt-3 approved_mgps"
+                        style="height: 25vh"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                      >
+                        <h6>Unexecuted Approved Gate passes</h6>
+                        <h1 class="mt-1 value">15</h1>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div
+                    class="card card-wrapper p-5 suborg"
+                    style="height: 68vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                  <h5>MGPS Breakdown by Suborg</h5>
+                    <canvas class="Chart12"></canvas>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="row">
+                    <div class="col-12">
+                      <div
+                        class="card card-wrapper p-5 mgps_type"
+                        style="height: 33vh"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                      >
+                        <h6>MGPS Requests Breakdown by Type</h6>
+                        <canvas class="Chart13 mt-2"></canvas>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div
+                        class="card card-wrapper p-5 mt-3 org_area"
+                        style="height: 33vh"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                      >
+                      <h5>MGPS Requestes Breakdown by Area</h5>
+                        <canvas class="Chart14"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div id="graph-4" class="swiper-slide">
+          <section class="d-flex justify-content-center mgps_iso">
+            <!-- <div class="slider-name">MGPS Industrial Security View</div> -->
+            <div class="w-85">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="row">
+                    <div class="col-12">
+                      <div
+                        class="card card-wrapper p-5 iso_ytd"
+                        style="height: 33vh"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                      > 
+                      <h4>MGPS YTD Breakdown by Month</h4>
+                        <canvas class="Chart15"></canvas>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div
+                            class="card card-wrapper p-4 mt-3 approved"
+                            style="height: 30vh; text-align: center"
+                            data-bs-toggle="modal"
+                            data-bs-target="#exampleModal"
+                          >
+                            <h6>Unexecuted Approved Gate passes</h6>
+                            <h1 class="mt-2 value">15</h1>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div
+                            class="card card-wrapper p-4 mt-3 emergency"
+                            style="height: 30vh; text-align: center"
+                            data-bs-toggle="modal"
+                            data-bs-target="#exampleModal"
+                          >
+                            <h6>Emergency Gate Passes YTD</h6>
+                            <h1 class="mt-2 value">15</h1>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div
+                    class="card card-wrapper p-4"
+                    style="height: 65vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                  <h6>Number of MGPS Request per ISO Area</h6>
+                    <canvas class="Chart16"></canvas>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="row">
+                    <div class="col-12">
+                      <div
+                        class="card card-wrapper p-5"
+                        style="height: 33vh"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                      >
+                        <h6>Number of MGPS Requests</h6>
+                        <canvas class="Chart17 mt-2"></canvas>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div
+                        class="card card-wrapper p-4 mt-3 executor"
+                        style="height: 30vh"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                      >
+                      <h6>top 5 MGPS Executors YTD</h6>
+                        <canvas class="Chart18"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div id="graph-10" class="swiper-slide">
+          <section class="d-flex justify-content-center vms_org">
+            <!-- <div class="slider-name">Visitor Managment System Organization View</div> -->
+            <div class="w-85">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="row">
+                    <div class="col-12">
+                      <div
+                        class="card card-wrapper p-5 checkin_ytd"
+                        style="height: 40vh"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                      >
+                      <h6>VMS Checkins YTD breakdown by month</h6>
+                        <canvas class="Chart19"></canvas>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div
+                        class="card card-wrapper p-4 mt-3 active_vms"
+                        style="height: 25vh"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                      >
+                        <h6>Valid VMS Requests</h6>
+                        <h1 class="mt-2 value">15</h1>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div
+                    class="card card-wrapper p-5"
+                    style="height: 67vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                  <h5>Checkins By Gate</h5>
+                    <canvas class="Chart20"></canvas>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="row">
+                    <div class="col-12">
+                      <div
+                        class="card card-wrapper p-4 freq_visitors" 
+                        style="height: 25vh"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                      >
+                        <h5 class="text-center mb-4">
+                          Visitors with the highest frequency
+                                                </h5>
+                        <h6 class="values"></h6>
+                                              
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div
+                        class="card card-wrapper p-5 mt-3"
+                        style="height: 40vh"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                      >
+                      <h5>Checkins By Org</h5>
+                        <canvas class="Chart21"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div id="graph-5" class="swiper-slide">
+          <section class="d-flex justify-content-center vms_iso">
+            <!-- <div class="slider-name">Visitor Managment System Industrial Security Operations CPH View</div> -->
+            <div class="w-85">
+              <div class="row">
+                <div class="col-md-3">
+                  <div
+                    class="card card-wrapper p-4"
+                    style="height: 35vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <h6
+                      style="
+                        margin-top: -45px !important;
+                        margin-bottom: 35px !important;
+                      "
+                    >
+                      Total Check-ins YTD
+                    </h6>
+                    <canvas class="Chart22"></canvas>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div
+                    class="card card-wrapper p-4"
+                    style="height: 35vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <h6
+                      style="
+                        margin-top: -45px !important;
+                        margin-bottom: 35px !important;
+                      "
+                    >
+                      Check-ins by Check-ins method
+                    </h6>
+                    <canvas class="Chart33"></canvas>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div
+                    class="card card-wrapper p-4"
+                    style="height: 35vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <h6>Check-ins by Gates & Visits Type</h6>
+                    <canvas class="Chart23"></canvas>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div
+                    class="card card-wrapper p-4 mt-3"
+                    style="height: 30vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <h6
+                      style="
+                        margin-top: -40px !important;
+                        margin-bottom: 20px !important;
+                      "
+                    >
+                      current valid visit request
+                    </h6>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="card card-wrapper temporary_valid_visit">
+                          <h1 class="value">15</h1>
+                          <h6>Business</h6>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="card card-wrapper personal_valid_visit">
+                          <h1 class="value">30</h1>
+                          <h6>Personal</h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div
+                    class="card card-wrapper p-4 mt-3"
+                    style="height: 30vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <h6>Number of Checkins per Area</h6>
+                    <canvas class="Chart24"></canvas>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div
+                    class="card card-wrapper p-4 mt-3 uncheckedout"
+                    style="height: 30vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <h6>Unchecked Out Visitors</h6>
+                    <h1 class="value">7</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="swiper-slide">
+          <section class="d-flex justify-content-center VMS_ISO_CPH" style="display: none;">
+            <div class="slider-name">Visitor Managment System ISO Managment View</div>
+            <div class="w-85">
+              <div class="row">
+                <div class="col-md-3">
+                  <div
+                    class="card card-wrapper p-4"
+                    style="height: 45vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <canvas class="Chart25"></canvas>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div
+                    class="card card-wrapper p-4"
+                    style="height: 45vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <canvas class="Chart26"></canvas>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div
+                    class="card card-wrapper p-4"
+                    style="height: 45vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <h5>current valid visit request</h5>
+                    <div class="d-flex mt-5">
+                      <div
+                        class="text-center me-5"
+                        style="
+                          border-radius: 10px;
+                          border: 1px solid black;
+                          padding: 11px;
+                        "
+                      >
+                        <h1>15</h1>
+                        <span>Business</span>
+                      </div>
+                      <div
+                        class="text-center"
+                        style="
+                          border-radius: 10px;
+                          border: 1px solid black;
+                          padding: 11px;
+                        "
+                      >
+                        <h1>30</h1>
+                        <span>Personal</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div
+                    class="card card-wrapper p-4"
+                    style="height: 45vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <canvas class="Chart27"></canvas>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div
+                    class="card card-wrapper p-4 mt-3"
+                    style="height: 47vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <canvas class="Chart28"></canvas>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div
+                    class="card card-wrapper p-4 mt-3"
+                    style="height: 47vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <h6>Top 25% visiting individuals</h6>
+                    <div
+                      class="table-responsive table-container"
+                      style="width: 100%; margin-top: -20px"
+                    >
+                      <table class="table text-center mb-0 w-100">
+                        <thead>
+                          <tr>
+                            <th
+                              scope="col"
+                              style="font-size: 25px; text-align: start"
+                            >
+                              Name
+                            </th>
+                            <th scope="col">#</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td style="text-align: start">Saleh</td>
+                            <td>50</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: start">ALi</td>
+                            <td>15</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: start">Sohaib</td>
+                            <td>1</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div
+                    class="card card-wrapper p-4 mt-3"
+                    style="height: 47vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <h6>
+                      No of persons with <br />
+                      extended validity
+                    </h6>
+                    <h1 class="mt-2">20</h1>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div
+                    class="card card-wrapper p-4 mt-3"
+                    style="height: 47vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <canvas class="Chart29"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div id="graph-6" class="swiper-slide">
+          <section class="d-flex justify-content-center">
+            <!-- <div class="slider-name">Plate Recognition Systems View</div> -->
+            <div class="w-85">
+              <div class="row">
+                <div class="col-md-4">
+                  <div
+                    class="card card-wrapper p-4"
+                    style="height: 35vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <canvas class="Chart30"></canvas>
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <div
+                    class="card card-wrapper p-2"
+                    style="height: 35vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <canvas class="Chart31"></canvas>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div
+                    class="card card-wrapper p-2 mt-3"
+                    style="height: 30vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <canvas class="Chart32"></canvas>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div
+                    class="card card-wrapper p-4 mt-3"
+                    style="height: 30vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <h5>Blacklisted Vehicles</h5>
+                    <h1 class="mt-2">99</h1>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div
+                    class="card card-wrapper p-4 mt-3"
+                    style="height: 30vh"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <h5>Vehicles for interest</h5>
+                    <h1 class="mt-2">5</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="swiper-slide">
+          <section class="d-flex justify-content-center">
+            <div class="slider-name">slider 13</div>
+            <div class="w-85">
+              <div class="row">
+                <div class="col-md-4">
+                  <div
+                    class="card card-wrapper p-4 mt-5"
+                    style="height: 352px"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <h5>Traffic Violations</h5>
+                    <h6 class="mt-2">Subtitle</h6>
+                    <p class="mt-3" style="line-height: 30px">
+                      Nullam id dolor id nibh ultricies vehicula ut id elit.
+                      Cras justo odio, dapibus ac facilisis in, egestas eget
+                      quam. Donec id elit non mi porta gravida at eget metus.
+                    </p>
+                    <a
+                      href="page.html"
+                      class="btn rounded-pill btn-primary sub-btn mt-4 d-block"
+                      >Submit Request</a
+                    >
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div
+                    class="card card-wrapper p-4 mt-5"
+                    style="height: 352px"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <h5>Traffic Violations</h5>
+                    <h6 class="mt-2">Subtitle</h6>
+                    <p class="mt-3" style="line-height: 30px">
+                      Nullam id dolor id nibh ultricies vehicula ut id elit.
+                      Cras justo odio, dapibus ac facilisis in, egestas eget
+                      quam. Donec id elit non mi porta gravida at eget metus.
+                    </p>
+                    <a
+                      href="page.html"
+                      class="btn rounded-pill btn-primary sub-btn mt-4 d-block"
+                      >Submit Request</a
+                    >
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div
+                    class="card card-wrapper p-4 mt-5"
+                    style="height: 352px"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <h5>Traffic Violations</h5>
+                    <h6 class="mt-2">Subtitle</h6>
+                    
+                    <p class="mt-3" style="line-height: 30px">
+                      Nullam id dolor id nibh ultricies vehicula ut id elit.
+                      Cras justo odio, dapibus ac facilisis in, egestas eget
+                      quam. Donec id elit non mi porta gravida at eget metus.
+                    </p>
+                    <a
+                      href="page.html"
+                      class="btn rounded-pill btn-primary sub-btn mt-4 d-block"
+                      >Submit Request</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <!-- <div class="swiper-pagination"></div> -->
+    </div>
+  </div>
+
+    <!-- Responsive Layout -->
+ 
+    <section class="responsive-content">
+      <section id="" class="graph-1 container-fluid card-p">
+        <div class="row">
+          <div class="col-md-4">
+            <div
+              class="card card-wrapper p-4 mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <h5>Violation By Employee Type</h5>
+              <canvas class="ctx1"></canvas>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div
+              class="card card-wrapper p-4 mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <h5>2023/2024 Weekly Violations Statistics Org</h5>
+              <canvas class="ctx2"></canvas>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div
+              class="card card-wrapper p-4 mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <h5>Violations By Childern Orgs</h5>
+              <canvas class="ctx3"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="container-fluid card-p">
+        <div class="row">
+          <div class="col-md-6">
+            <div
+              class="card card-wrapper p-4 mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <h5>Violation By Employee Type</h5>
+              <canvas class="ctx4"></canvas>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div
+              class="card card-wrapper p-4 mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <h5>2023/2024 Weekly Violations Statistics Org</h5>
+              <canvas class="ctx5"></canvas>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div
+              class="card card-wrapper p-4 mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <h5>Violations By Childern Orgs</h5>
+              <canvas class="ctx6"></canvas>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div
+              class="card card-wrapper p-4 mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <h5>Violations By Childern Orgs</h5>
+              <canvas class="ctx7"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="container-fluid card-p">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-6">
+                <div
+                  class="card card-wrapper p-4 mt-4"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  <h1 class="left-h1">1260</h1>
+                  <h5 class="left-h5">Authorize Employees</h5>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div
+                  class="card card-wrapper p-4 mt-4"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  <h5>Plant Access by Type</h5>
+                  <canvas class="ctx8"></canvas>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div
+                  class="card card-wrapper chart-img p-4 mt-4"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  <img src="../assets/img/id.jpg" alt="" />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div
+                  class="card card-wrapper chart-img p-4 mt-4"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  <img src="../assets/img/id.jpg" alt="" />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div
+                  class="card card-wrapper chart-img p-4 mt-4"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  <img src="../assets/img/id.jpg" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div
+                      class="card card-wrapper p-4 mt-4"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                      style="
+                        background-color: #3faa77;
+                        color: #fff;
+                        background-image: none;
+                      "
+                    >
+                      <h3>1,001</h3>
+                      <p>currently in</p>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div
+                      class="card card-wrapper p-4 mt-4"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                    >
+                      <h5>Top Aramco Dept.</h5>
+                      <p>Industrial Security Support</p>
+                      <p>
+                        Industrial Security Operation <br />
+                        Fire Protection
+                      </p>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div
+                      class="card card-wrapper p-4 mt-4"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                    >
+                      <h3>120</h3>
+                      <p>VMX</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div
+                      class="card card-wrapper p-4 mt-4"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                    >
+                      <h5>Plant Access by Type</h5>
+                      <canvas class="ctx9"></canvas>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div
+                      class="card card-wrapper p-4 mt-4"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                    >
+                      <h5>Top Contractor</h5>
+                      <p>Al Zamil co.</p>
+                      <p>Al Hajri co.</p>
+                      <p>York co.</p>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div
+                      class="card card-wrapper p-4 mt-4"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                    >
+                      <h3>155</h3>
+                      <p>MGPS</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="container-fluid card-p">
+        <div class="row">
+          <div class="col-md-6">
+            <div
+              class="card card-wrapper mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <div
+                id="slide04-1"
+                class="chart"
+                style="height: 100vh; width: 100%"
+              >
+                <canvas class="chart canvasCtx1"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div
+                      class="card card-wrapper p-4 mt-4"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                      style="
+                        background-color: #3faa77;
+                        color: #fff;
+                        background-image: none;
+                      "
+                    >
+                      <h3>1,001</h3>
+                      <p>currently in</p>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div
+                      class="card card-wrapper p-4 mt-4"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                    >
+                      <h5>Top Aramco Dept.</h5>
+                      <p>Industrial Security Support</p>
+                      <p>
+                        Industrial Security Operation <br />
+                        Fire Protection
+                      </p>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div
+                      class="card card-wrapper p-4 mt-4"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                    >
+                      <h3>120</h3>
+                      <p>VMX</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div
+                      class="card card-wrapper p-4 mt-4"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                    >
+                      <h5>Plant Access by Type</h5>
+                      <canvas class="ctx10"></canvas>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div
+                      class="card card-wrapper p-4 mt-4"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                    >
+                      <h3>Top Contractor</h3>
+                      <p>Al Zamil co.</p>
+                      <p>Al Hajri co.</p>
+                      <p>York co.</p>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div
+                      class="card card-wrapper p-4 mt-4"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                    >
+                      <h3>155</h3>
+                      <p>MGPS</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="container-fluid card-p">
+        <div class="row">
+          <div class="col-12">
+            <div
+              class="card card-wrapper p-4 mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <div
+                id="slide05"
+                class="chart"
+                style="height: 100vh; width: 100%"
+              >
+                <canvas class="chart canvasCtx"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="container-fluid card-p">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-12">
+                <div
+                  class="card card-wrapper p-4 mt-4"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  <canvas class="ctx11"></canvas>
+                </div>
+              </div>
+              <div class="col-12">
+                <div
+                  class="card card-wrapper p-4 mt-4"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  <h5>Unexecuted Approved Gate passes</h5>
+                  <h2>15</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div
+              class="card card-wrapper p-4 mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <canvas class="ctx12"></canvas>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-12">
+                <div
+                  class="card card-wrapper p-4 mt-4"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  <h5>Number of Approved MGPS Requests</h5>
+                  <canvas class="ctx13"></canvas>
+                </div>
+              </div>
+              <div class="col-12">
+                <div
+                  class="card card-wrapper p-4 mt-4"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  <canvas class="ctx14"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="container-fluid card-p">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-12">
+                <div
+                  class="card card-wrapper p-4 mt-4"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  <canvas class="ctx15"></canvas>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div
+                      class="card card-wrapper p-4 mt-4"
+                      style="text-align: center"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                    >
+                      <h6>Unexecuted Approved Gate passes</h6>
+                      <h2>15</h2>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div
+                      class="card card-wrapper p-4 mt-4"
+                      style="text-align: center"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                    >
+                      <h6>Emergency Gate Passes YTD</h6>
+                      <h2>15</h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div
+              class="card card-wrapper p-4 mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <canvas class="ctx16"></canvas>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-12">
+                <div
+                  class="card card-wrapper p-4 mt-4"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  <h6>Number of Approved MGPS Requests</h6>
+                  <canvas class="ctx17"></canvas>
+                </div>
+              </div>
+              <div class="col-12">
+                <div
+                  class="card card-wrapper p-4 mt-4"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  <canvas class="ctx18"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="container-fluid card-p">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-12">
+                <div
+                  class="card card-wrapper p-4 mt-4"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  <canvas class="ctx19"></canvas>
+                </div>
+              </div>
+              <div class="col-12">
+                <div
+                  class="card card-wrapper p-4 mt-4"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  <h5>Unexecuted Approved Gate passes</h5>
+                  <h2>15</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div
+              class="card card-wrapper p-4 mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <canvas class="ctx20"></canvas>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-12">
+                <div
+                  class="card card-wrapper p-4 mt-4"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  <h5>Top 25% visiting individuals</h5>
+                  <div
+                          class="table-responsive table-container"
+                          style="width: 100%; margin-top: -20px"
+                        >
+                          <table class="table text-center mb-0 w-100">
+                            <thead>
+                              <tr>
+                                <th
+                                  scope="col"
+                                  style="font-size: 25px; text-align: start"
+                                >
+                                  Name
+                                </th>
+                                <th scope="col">#</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td style="text-align: start">Saleh</td>
+                                <td>50</td>
+                              </tr>
+                              <tr>
+                                <td style="text-align: start">ALi</td>
+                                <td>15</td>
+                              </tr>
+                              <tr>
+                                <td style="text-align: start">Sohaib</td>
+                                <td>1</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div
+                  class="card card-wrapper p-4 mt-4"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  <canvas class="ctx21"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="container-fluid card-p">
+        <div class="row">
+          <div class="col-md-6">
+            <div
+              class="card card-wrapper p-4 mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <canvas class="ctx22"></canvas>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div
+              class="card card-wrapper p-4 mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <canvas class="ctx23"></canvas>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div
+              class="card card-wrapper p-4 mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <canvas class="ctx24"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="container-fluid card-p">
+        <div class="row">
+          <div class="col-md-3">
+            <div
+              class="card card-wrapper p-4 mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <canvas class="ctx25"></canvas>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div
+              class="card card-wrapper p-4 mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <canvas class="ctx26"></canvas>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div
+              class="card card-wrapper p-4 mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <h5>current valid visit request</h5>
+              <div class="d-flex mt-5">
+                <div
+                  class="text-center me-5"
+                  style="
+                    border-radius: 10px;
+                    border: 1px solid black;
+                    padding: 11px;
+                  "
+                >
+                  <h2>15</h2>
+                  <span>Business</span>
+                </div>
+                <div
+                  class="text-center"
+                  style="
+                    border-radius: 10px;
+                    border: 1px solid black;
+                    padding: 11px;
+                  "
+                >
+                  <h2>30</h2>
+                  <span>Personal</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div
+              class="card card-wrapper p-4 mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <canvas class="ctx27"></canvas>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div
+              class="card card-wrapper p-4 mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <canvas class="ctx28"></canvas>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div
+              class="card card-wrapper p-4 mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <h5>Top 25% visiting individuals</h5>
+              <div
+                          class="table-responsive table-container"
+                          style="width: 100%; margin-top: -20px"
+                        >
+                          <table class="table text-center mb-0 w-100">
+                            <thead>
+                              <tr>
+                                <th
+                                  scope="col"
+                                  style="font-size: 25px; text-align: start"
+                                >
+                                  Name
+                                </th>
+                                <th scope="col">#</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td style="text-align: start">Saleh</td>
+                                <td>50</td>
+                              </tr>
+                              <tr>
+                                <td style="text-align: start">ALi</td>
+                                <td>15</td>
+                              </tr>
+                              <tr>
+                                <td style="text-align: start">Sohaib</td>
+                                <td>1</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div
+              class="card card-wrapper p-4 mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <h5>
+                No of persons with <br />
+                extended validity
+              </h5>
+              <h1>20</h1>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div
+              class="card card-wrapper p-4 mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <canvas class="ctx29"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="container-fluid card-p">
+        <div class="row">
+          <div class="col-md-4">
+            <div
+              class="card card-wrapper p-4 mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <canvas class="ctx30"></canvas>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div
+              class="card card-wrapper p-4 mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <canvas class="ctx31"></canvas>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div
+              class="card card-wrapper p-4 mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <canvas class="ctx32"></canvas>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div
+              class="card card-wrapper p-4 mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <h5>Blacklisted Vehicles</h5>
+              <h1>99</h1>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div
+              class="card card-wrapper p-4 mt-4"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <h5>Vehicles for interest</h5>
+              <h1>5</h1>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+
+    <!-- Table Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" id="agGrid-modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button class="ui button green primary">Analyze Data</button>
+            <button class="ui button green primary">Export</button>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              id="modal-close-btn"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div
+              id="myGrid"
+              style="height: 80vh; width: 80vw"
+              class="ag-theme-quartz-dark"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ag Grid Form -->
+    <div
+      class="modal fade"
+      id="agGridFormModal"
+      tabindex="-1"
+      aria-labelledby="agGridFormModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" id="agGrid-modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              id="modal-close-btn"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form class="ui modal form">
+              <h4 class="ui dividing header">Grid Settings</h4>
+              <div class="two fields">
+                <div class="field">
+                  <div class="ui toggle checkbox">
+                    <input type="checkbox" name="advanced_filtering" tabindex="0" class="hidden" />
+                    <label>Advanced Filtering</label>
+                  </div>
+                </div>
+                <div class="field">
+                  <div class="ui toggle checkbox">
+                    <input type="checkbox" name="rowgrouping" tabindex="0" class="hidden" />
+                    <label>Allow Grouping</label>
+                  </div>
+                </div>
+              </div>
+              <div class="two fields">
+                <div class="field">
+                  <div class="ui toggle checkbox">
+                    <input type="checkbox" name="Pagenation" tabindex="0" class="hidden" />
+                    <label>Pagenation</label>
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Page Size</label>
+                  <input name="page_size" type="number" disabled min="10" max="1000" />
+                </div>
+              </div>
+              <div class="field">
+                <label>Panel</label>
+                <select multiple="" class="ui dropdown">
+                  <option value="agTotalAndFilteredRowCountComponent">TotalAndFilteredRowCountComponent</option>
+                  <option value="agTotalRowCountComponent">TotalRowCountComponent</option>
+                  <option value="agFilteredRowCountComponent">FilteredRowCountComponent</option>
+                  <option value="agSelectedRowCountComponent">SelectedRowCountComponent</option>
+                  <option value="agAggregationComponent">AggregationComponent</option>
+                </select>
+              </div>
+              <button class="ui positive button labeled icon" type="button">
+                <i class="share icon"></i>
+                Apply
+              </button>
+              <button class="ui positive button labeled icon" type="button">
+                <i class="save icon"></i>
+                Save
+              </button>
+              <button class="ui reset negative button labeled icon" type="button">
+                <i class="undo icon"></i>
+                Reset
+              </button>
+            </form>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Login Form Modal -->
+    <div
+      class="modal fade"
+      id="loginFormModal"
+      tabindex="-1"
+      aria-labelledby="loginFormModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <span style="font-size: 30px">Login</span>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              id="modal-close-btn"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form class="ui form">
+              <div class="field">
+                <label for="email" style="font-size: 30px">Email</label>
+                <div class="ui left icon input">
+                  <i class="envelope icon"></i>
+                  <input
+                    type="text"
+                    id="email"
+                    placeholder="example@gmail.com"
+                  />
+                </div>
+              </div>
+              <div class="field">
+                <label for="password" style="font-size: 30px">Password</label>
+                <div class="ui left icon input">
+                  <i class="key icon"></i>
+                  <input type="password" id="password" placehFolder="******" />
+                </div>
+              </div>
+              <div class="two fields">
+                <div class="field">
+                  <div class="ui checkbox">
+                    <input type="checkbox" id="rememberMe" />
+                    <label
+                      for="rememberMe"
+                      style="font-size: 25px; margin-left: 0 !important"
+                      >Remember me</label
+                    >
+                  </div>
+                </div>
+                <div class="field" style="text-align: right">
+                  <a href="#" style="font-size: 25px">Forget password?</a>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <button class="ui red button">
+                  <i class="google icon"></i> Google
+                </button>
+                                <button class="ui black button">
+                  <i class="apple icon"></i> Apple
+                </button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+        <!-- Template Customizer -->
+        <div class="template-customizer">
+          <i class="fa-solid fa-gear"></i>
+        </div>
+        <div class="body-drop-shadow"></div>
+
+        <div class="customizer">
+          <div class="template-customizer-box">
+            <ul>
+              <li class="icons"><i class="fa-solid fa-moon"></i></li>
+              <li class="icons2"><i class="fa-solid fa-sun"></i></li>
+              <li style="font-size: 1.5rem">
+                <button class="ui button" data-bs-toggle="modal" data-bs-target="#agGridFormModal"
+                  style="width: fit-content">
+                  Grid Settings
+                </button>
+              </li>
+              <li style="font-size: 1.5rem">
+                <button class="ui button" style="width: fit-content" data-bs-toggle="modal"
+                  data-bs-target="#emailSettingsFormModal">
+                  Email Settings
+                </button>
+              </li>
+              <li style="font-size: 1.5rem">
+                <button class="ui button" style="width: fit-content" data-bs-toggle="modal"
+                  data-bs-target="#impersonationFormModal">
+                  Impersonation
+                </button>
+              </li>
+            </ul>
+            <div class="close-customizer"><i class="fa-solid fa-xmark"></i></div>
+          </div>
+        </div>
+
+        <!-- Scripts -->
+        <script src="./assets/js/bootstrap-5.0.2.min.js"></script>
+        <script src="./assets/js/swiper-bundle.min.js"></script>
+        <script src="https://d3js.org/d3.v6.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-wordcloud"></script>
+        <script src="./assets/js/chart.js"></script>
+        <script src="./assets/js/chartjs-chart-wordcloud.js"></script>
+        <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
+        <script>
+            window.addEventListener('load', function() {
+        setTimeout(function() {
+            document.querySelector('.sipnner-container').classList.add('hidden');
+        }, 2000);
+    });
+            var charts = {}
+        </script>
+        <script src="./assets/js/script.js"></script>
+        <script src="./assets/js/responsive-chart.js"></script>
+        
+
+        <script>
+   function updateNavbarTitle() {
+        const currentPage = window.location.pathname; // Get the current page path
+        const navTitle = document.getElementById('nav-title'); // Get the navbar title element
+        
+        // Check if the current page is ISOPersonal or Company User and set title accordingly
+        if (currentPage.includes("ISOPersonal")) {
+            navTitle.textContent = "ISO Personal"; // Set title for ISOPersonal page
+        } else if (currentPage.includes("companyuser")) {
+            navTitle.textContent = "Company User"; // Set title for Company User page
+        }
+    }
+
+    // Call the function to update navbar title on page load
+    window.onload = updateNavbarTitle;
+
+          // Change Navbar Title----------------
+
+          function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+      }
+
+      // Get the card name from the URL
+      const cardName = getQueryParam('name');
+
+      // Select the navbar title element and update its text
+      const navbarTitle = document.getElementById('nav-card-title');
+      if (cardName) {
+        navbarTitle.textContent = cardName;
+      }
+          // Change Navbar Title----------------
+// Get the graph class from the URL
+function getGraphIdFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('graph'); // Get the "graph" parameter from the URL
+}
+
+// Show the selected graph based on the id
+function showGraph() {
+  const graphId = getGraphIdFromUrl();
+  if (graphId) {
+    // Prepend 'graph-' to the id to create a valid selector
+    const validId = `graph-${graphId}`;
+
+    // Hide all graph pages
+    const graphs = document.querySelectorAll('.swiper-slide');
+    graphs.forEach(graph => {
+      graph.classList.remove('active'); // Remove 'active' from all graphs
+    });
+
+    // Show the selected graph (single element with the corresponding id)
+    const selectedGraph = document.getElementById(validId);
+    if (selectedGraph) {
+      selectedGraph.classList.add('active'); // Add 'active' to the matching element
+    }
+  }
+}
+
+// Call the function when the page loads
+window.onload = showGraph;
+
+
+
+// Show Graphs 1 by 1 End========
+
+
+            document.querySelector('.VMS_ISO_CPH').parentNode.style.display = 'None'
+            var get_default_gridOptions = () => {
+                return {
+                    // Row Data: The data to be displayed.
+                    statusBar: {
+                        statusPanels: [{
+                            statusPanel: "agTotalAndFilteredRowCountComponent"
+                        }, {
+                            statusPanel: "agTotalRowCountComponent"
+                        }, {
+                            statusPanel: "agFilteredRowCountComponent"
+                        }, {
+                            statusPanel: "agSelectedRowCountComponent"
+                        }, {
+                            statusPanel: "agAggregationComponent"
+                        }, ],
+                    },
+                    enableAdvancedFilter: true,
+                    pagination: true,
+                    paginationPageSize: 10,
+                    paginationPageSizeSelector: [10, 20, 50, 100],
+                    defaultColDef: {
+                        editable: false,
+                        filter: true,
+                        enableRowGroup: true,
+                        flex: 1,
+                        minWidth: 190,
+                    },
+                    rowGroupPanelShow: "always",
+                };
+            };
+
+            var gridOptions = get_default_gridOptions();
+            // document.querySelector(".showmodal").onclick = () => {
+            //   $(".ui.modal").modal("show");
+            // };
+            $(".ui.dropdown").dropdown({
+                clearable: true,
+                placeholder: "any",
+            });
+            $(".ui.checkbox").checkbox();
+
+            document.querySelector('input[name="advanced_filtering"]').onchange = (
+                event
+            ) => {
+                console.log(
+                    "Changed Value of advanced_filtering",
+                    document.querySelector('input[name="advanced_filtering"]').checked
+                );
+                grid.setGridOption(
+                    "enableAdvancedFilter",
+                    document.querySelector('input[name="advanced_filtering"]').checked
+                );
+            };
+            document.querySelector('input[name="rowgrouping"]').onchange = (
+                event
+            ) => {
+                gridOptions.defaultColDef.enableRowGroup = document.querySelector(
+                    'input[name="rowgrouping"]'
+                ).checked;
+                gridOptions.rowGroupPanelShow = document.querySelector(
+                        'input[name="rowgrouping"]'
+                    ).checked ?
+                    "always" :
+                    "never";
+                grid.updateGridOptions(gridOptions);
+                console.log(
+                    "Changed Value of rowgrouping",
+                    document.querySelector('input[name="rowgrouping"]').checked
+                );
+            };
+            document.querySelector('input[name="page_size"]').disabled = !document.querySelector('input[name="Pagenation"]').checked;
+            document.querySelector('input[name="Pagenation"]').onchange = (event) => {
+                document.querySelector('input[name="page_size"]').disabled = !document.querySelector('input[name="Pagenation"]').checked;
+                gridOptions.pagination = document.querySelector(
+                    'input[name="Pagenation"]'
+                ).checked;
+                grid.updateGridOptions(gridOptions);
+            };
+            document.querySelector('input[name="page_size"]').onchange = (event) => {
+                console.log(event);
+                console.log(gridOptions.paginationPageSize);
+                gridOptions.pagination = document.querySelector(
+                    'input[name="Pagenation"]'
+                ).checked;
+                if (document.querySelector('input[name="Pagenation"]').checked) {
+                    var multipliers = [1, 2, 5, 10];
+                    gridOptions.paginationPageSizeSelector = multipliers.map(
+                        (i) => document.querySelector('input[name="page_size"]').value * i
+                    );
+
+                    gridOptions.paginationPageSize = parseInt(
+                        document.querySelector('input[name="page_size"]').value
+                    );
+                }
+                grid.updateGridOptions(gridOptions);
+            };
+
+            document.querySelector(".ui.dropdown").onchange = () => {
+                const values = [...document.querySelector(".ui.dropdown").children]
+                    .map((x) => x.dataset.value)
+                    .filter((x) => x !== undefined)
+                    .map((value) => {
+                        return {
+                            statusPanel: value
+                        };
+                    });
+                gridOptions.statusBar.statusPanels = values;
+                grid.updateGridOptions(gridOptions);
+                console.log(values);
+            };
+            document.querySelector(".reset.button.ui").onclick = () => {
+                console.log("clicked reset button");
+                gridOptions = get_default_gridOptions();
+                grid.updateGridOptions(gridOptions);
+            };
+
+            const myGridElement = document.querySelector("#myGrid");
+            var grid = agGrid.createGrid(myGridElement, gridOptions);
+            var update_grid = (raw_data) => {
+                console.log("called update_grid with ", raw_data)
+                if (raw_data.length > 0) {
+                    gridOptions.columnDefs = Object.keys(raw_data[0]).map((x) => {
+                        return {
+                            field: x
+                        };
+                    });
+                    gridOptions.rowData = raw_data;
+
+                    grid.updateGridOptions(gridOptions);
+                } else {
+                    // alert("No Data Found");
+                    gridOptions.columnDefs = []
+                    gridOptions.rowData = []
+                    grid.updateGridOptions(gridOptions)
+
+                    return;
+                }
+            };
+            var privilege = {
+                "11+": '#4ab636',
+                "3-8": '#138cd4',
+                "9&10": '#138cd4',
+                "NCF": '#d4b213'
+
+            }
+            var view_data = {};
+
+            function populate_personal_view(data) {
+                view_data["personal_view"] = data
+                let employee_id = data.network_active_id[0]
+                console.log(employee_id)
+                    //id card
+                document.querySelector('.arabic_name').innerHTML = employee_id.ARABIC_NAME
+                document.querySelector('.english_name').innerHTML = employee_id.ENGLISH_NAME
+                document.querySelector('.idcolor').style.background = privilege[employee_id.PRIVILEGE]
+                document.querySelector('.card_title').innerHTML = employee_id.CARD_TITLE
+                document.querySelector('.expiry_date').innerHTML = employee_id.CARD_EXPIRY
+                document.querySelector('.badge_number').innerHTML = employee_id.BADGE_NUMBER
+                document.querySelector('.arabic_card_title').innerHTML = employee_id.CARD_TITLE_ARABIC
+                document.querySelector('.employee_photo').src = data.photo[0].photo
+                    //stickers
+                document.querySelector('.swiper2 .swiper-wrapper ').innerHTML = ''
+                data.vehicle_stickers.forEach(plate => {
+                    let english_plate = plate["PLATE_NUMBER_EN"]
+                    let first_space = english_plate.indexOf(" ")
+                    let arabic_plate = plate["PLATE_NUMBER_AR"]
+                    let ar_first_space = arabic_plate.lastIndexOf(" ")
+                    console.log("english Characters", english_plate.substring(0, first_space))
+                    console.log("english Numbers", english_plate.substring(first_space))
+                    console.log("arabic Characters", arabic_plate.substring(0, ar_first_space))
+                    console.log("arabic Numbers", arabic_plate.substring(ar_first_space))
+                    var plate_item = document.createElement('div')
+                    var plate_template = ` <div               class="swiper-slide"               style="background: transparent"              >               <!-- <img                src="./saudi-white-number-plate.png"                alt=""               /> -->               <div                style="                 display: grid;                 grid-template-columns: 2fr 1.5fr;                 margin-left: 10px;                 height: 110px;                 border: 2px solid #000;                 border-radius: 10px;                 background-color: #fff;                "                class="h-fit-plate"               >                <div class="plate-grid-item">                 <p class="plate-txt arabic-number">1511</p>                </div>                <div class="plate-grid-item">                 <p                  class="plate-txt arabic-text"                  style="font-size: 20px; white-space: nowrap"                 >                  د ع ا                 </p>                </div>                <div class="plate-grid-item">                 <p class="plate-txt english-number">1511</p>                </div>                <div class="plate-grid-item">                 <p                  class="plate-txt english-text"                  style="font-size: 20px; white-space: nowrap"                 >                  A E D                 </p>                </div>                <div                 class="text-start plate-grid-item vertical-item"                >                 <img                  src="../assets/img/download.jpg"                  width="15px"                  height="15px"                  style="                   position: absolute;                   top: 20%;                   left: 50%;                   bottom: 50%;                   transform: translate(-50%, -50%);                  "                 /><span                  class="vertical-txt"                  style="                   top: 55%;                   left: 50%;                   transform: translate(-50%, -50%);                  "                  >KSA</span                 >                 <div                  style="                   width: 10px;                   height: 10px;                   background-color: black;                   border-radius: 50%;                   position: absolute;                   top: 85%;                   transform: translate(-50%, -50%);                  "                 ></div>                </div>               </div> `
+                    plate_item.innerHTML = plate_template
+                        //arabic-text arabic-number english-text english-number
+                    plate_item.querySelector('.arabic-text').innerHTML = arabic_plate.substring(0, ar_first_space)
+                    plate_item.querySelector('.arabic-number').innerHTML = arabic_plate.substring(ar_first_space)
+                    plate_item.querySelector('.english-text').innerHTML = english_plate.substring(0, first_space)
+                    plate_item.querySelector('.english-number').innerHTML = english_plate.substring(first_space)
+                    document.querySelector('.swiper2 .swiper-wrapper').innerHTML += plate_item.innerHTML
+
+                })
+
+                let swiper2 = new Swiper(".swiper2", {
+                    autoplay: {
+                        delay: 3000,
+                        disableOnInteraction: false,
+                    },
+                    direction: "horizontal",
+                    mousewheel: true,
+                    slidePreView: 1,
+                });
+                var non_values = ["network_active_id", "vehicle_stickers", "photo"]
+                var list_values = Object.keys(data).filter(x => !non_values.includes(x))
+                    //populate values
+
+                list_values.forEach((value) => {
+                    console.log("populatting value", value)
+                    document.querySelector(`.${value} .value`).innerHTML = data[value].length
+
+
+                })
+
+                //
+
+
+
+
+
+            }
+
+            function populate_traffic_org_view(data) {
+                //chart1 violation_by_employee_type chart
+                view_data["traffic_org"] = data
+                charts["Chart1"].data.labels = data.orgcode_employeetype.map(x => x["violator_type"])
+                charts["Chart1"].data.datasets[0].label = "Number of Violations"
+                charts["Chart1"].data.datasets[0].data = data.orgcode_employeetype.map(x => x["total"])
+                charts["Chart1"].update()
+
+                //chart yearly weekly violations statistics org org_violations_year
+                var year = new Date().getFullYear()
+                document.querySelector(".org_violations_year").innerHTML = `${year-1}/${year}`
+                charts["Chart2"].data.labels = Array(Math.max(...data.orgcode_weekly.map(i => parseInt(i.week)))).fill(0).map((value, index) => index + 1)
+                charts["Chart2"].data.datasets[0].label = year - 1
+                charts["Chart2"].data.datasets[1].label = year
+                charts["Chart2"].data.datasets[0].data = data.orgcode_weekly.filter(row => row["year"] == year - 1).map(x => x.total)
+                charts["Chart2"].data.datasets[1].data = data.orgcode_weekly.filter(row => row["year"] == year).map(x => x.total)
+                charts["Chart2"].update()
+                    //chart violations by Organizations
+                charts["Chart3"].data.labels = [...new Set(data.first_child.map(x => x.orgname))]
+                charts["Chart3"].data.datasets[0].label = year - 1
+                charts["Chart3"].data.datasets[1].label = year
+                charts["Chart3"].data.datasets[0].data = data.first_child.filter(row => row["year"] == year - 1).map(x => x.total)
+                charts["Chart3"].data.datasets[1].data = data.first_child.filter(row => row["year"] == year).map(x => x.total)
+                charts["Chart3"].update()
+
+
+            }
+
+            function populate_traffic_security_view(data) {
+                //chart1 violation_by_employee_type chart
+                view_data["traffic_security"] = data
+                    //ISO Org # violations
+                charts["Chart4"].data.labels = [...new Set(data.orgcode_iso_area)].map(x => x.org_title)
+                charts["Chart4"].data.datasets[0].label = "Number of Violations"
+                charts["Chart4"].data.datasets[0].data = [...new Set(data.orgcode_iso_area)].map(x => x.total)
+                charts["Chart4"].update()
+                    //ISO by Security Man 
+                charts["Chart5"].data.datasets[0].label = "Number of Issued Violations"
+                charts["Chart5"].data.labels = data.orgcode_iso_officers.sort((a, b) => b.total - a.total).slice(0, 5).map(x => x.SecurityManname)
+                charts["Chart5"].data.datasets[0].data = data.orgcode_iso_officers.sort((a, b) => b.total - a.total).slice(0, 5).map(x => x.total)
+                charts["Chart5"].update()
+                    //Violations by location 
+                charts["Chart6"].data.labels = data.orgcode_iso_locations.map(x => x.area)
+                charts["Chart6"].data.datasets[0].label = "Number of Violations"
+                charts["Chart6"].data.datasets[0].data = data.orgcode_iso_locations.map(x => x.total)
+                charts["Chart6"].update()
+                    //violations by violator type
+                charts["Chart7"].data.labels = data.orgcode_iso_type.map(x => x.violator_type)
+                charts["Chart7"].data.datasets[0].label = "Number of Violations"
+                charts["Chart7"].data.datasets[0].data = data.orgcode_iso_type.map(x => x.total)
+                charts["Chart7"].update()
+
+
+
+            }
+
+            function populate_plant_owner_view(data) {
+                //set cards
+                view_data["plant_owner"] = data
+                document.querySelector('.plant_owner_org .authorized_employees').innerHTML = [...new Set(data.restricted_access.map(x => x.BADGE_NUMBER))].length.toLocaleString()
+                document.querySelector('.plant_owner_org .vms .value').innerHTML = data.restricted_vms.length.toLocaleString()
+                document.querySelector('.plant_owner_org .mgps .value').innerHTML = data.restricted_mgps.length.toLocaleString()
+                document.querySelector('.plant_owner_org .inside').innerHTML = [...new Set(data.currently_inside.map(x => x.badge_no))].length.toLocaleString()
+                document.querySelector('.plant_owner_org .contractors').innerHTML = data.orgcode_type.filter(x => x.GROUP_DESCRIPTION == 'Contractor Personnel').map(x => x.COUNT)[0]
+                document.querySelector('.plant_owner_org .smps').innerHTML = data.orgcode_type.filter(x => x.GROUP_DESCRIPTION == 'SMP').map(x => x.COUNT)[0]
+                document.querySelector('.plant_owner_org .employees').innerHTML = data.orgcode_type.filter(x => x.GROUP_DESCRIPTION == 'Employee').map(x => x.COUNT)[0]
+                    //top employee groups
+                document.querySelector('.plant_owner_org .orgs .value').innerHTML = data.restricted_departments.sort((a, b) => b.TOTAL_NUMBER - a.TOTAL_NUMBER).slice(0, 5).map(x => x.DEPARTMENTS + "-" + x.TOTAL_NUMBER).reduce((a, b) => a + "<br>" + b)
+                document.querySelector('.plant_owner_org .vendors .value').innerHTML = data.restricted_vendors.sort((a, b) => b.TOTAL_NUMBER - a.TOTAL_NUMBER).slice(0, 5).map(x => x.VENDOR + "-" + x.TOTAL_NUMBER).reduce((a, b) => a + "<br>" + b)
+
+                //update charts
+                //authroized employee count chart
+                charts["Chart8"].data.labels = data.orgcode_type.map(x => x.GROUP_DESCRIPTION)
+                charts["Chart8"].data.datasets[0].label = "Number of Personnel"
+                charts["Chart8"].data.datasets[0].data = data.orgcode_type.map(x => x.COUNT)
+                charts["Chart8"].update()
+                    //inside count chart 
+                charts["Chart9"].data.labels = data.currently_inside_type.map(x => x.employee_type)
+                charts["Chart9"].data.datasets[0].label = "Number of Personnel"
+                charts["Chart9"].data.datasets[0].data = data.currently_inside_type.map(x => x.total)
+                charts["Chart9"].update()
+
+
+
+
+
+
+            }
+            var groupBy = function(xs, key) {
+                return xs.reduce(function(rv, x) {
+                    (rv[x[key]] = rv[x[key]] || []).push(x);
+                    return rv;
+                }, {});
+            };
+
+            function populate_restricted_access_view(data) {
+
+                view_data["restricted_org"] = data
+                    //wordcloud 
+                const max_font_size = 45
+                const max_size_value = Math.max(...data.orgcode_plants_code.map(x => x.TOTAL))
+                charts["wordCloud1"].data.labels = data.orgcode_plants_code.map(x => x.CODE)
+                charts["wordCloud1"].data.datasets[0].data = data.orgcode_plants_code.map(x => x.TOTAL).map(x => x / max_size_value * max_font_size)
+                charts["wordCloud1"].data.datasets[0]["Count"] = data.orgcode_plants_code.map(x => x.TOTAL)
+                charts["wordCloud1"]["options"]["plugins"] = {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: (item) => `${item.label}:${item.dataset.Count[item.dataIndex]}`
+                        }
+                    }
+                }
+                charts["wordCloud1"].update()
+                    //labels
+                document.querySelector('.authorized_access .authorized .value').innerHTML = [...new Set(data.orgcode.map(x => x.BADGE_NUMBER))].length.toLocaleString()
+                document.querySelector('.authorized_access .orgcode_expiring_next_month .value').innerHTML = data.orgcode_expiring_next_month[0]["PERCENTAGE"] + "%"
+                document.querySelector('.authorized_access .orgcode_top_org .value').innerHTML = data.orgcode_top_org.sort((a, b) => b.TOTAL - a.TOTAL).slice(0, 5).map(x => x.ORG_TITLE + "-" + x.TOTAL).reduce((a, b) => a + b + "<br>", "")
+                document.querySelector('.authorized_access .orgcode_top_vendor .value').innerHTML = data.orgcode_top_vendor.sort((a, b) => b.TOTAL - a.TOTAL).slice(0, 5).map(x => x.VENDOR_NAME + "-" + x.TOTAL).reduce((a, b) => a + b + "<br>", "")
+
+                //charts 
+                //employee_type chart
+                charts["Chart10"].data.labels = data.orgcode_type.map(x => x.GROUP_DESCRIPTION)
+                charts["Chart10"].data.datasets[0].label = "Number of Personnel"
+                charts["Chart10"].data.datasets[0].data = data.orgcode_type.map(x => x.COUNT)
+                charts["Chart10"].update()
+
+                //last_time_utilized chart
+                var results = groupBy(data.orgcode_last_utilized, "class")
+                charts["Chart34"].data.labels = Object.keys(results)
+                charts["Chart34"].data.datasets[0].label = "Number of Personnel"
+                charts["Chart34"].data.datasets[0].data = Object.values(results).map(x => x.length)
+                charts["Chart34"].update()
+
+
+
+            }
+
+            function populate_security_view(data) {
+
+                view_data["plant_security"] = data
+                    //wordcloud 
+                const max_font_size = 45
+                const max_size_value = Math.max(...data.orgcode_plants.map(x => x.total))
+                charts["wordCloud2"].data.labels = data.orgcode_plants.map(x => x.plant_name)
+                charts["wordCloud2"].data.datasets[0].data = data.orgcode_plants.map(x => x.total).map(x => x / max_size_value * max_font_size)
+                charts["wordCloud2"].data.datasets[0]["Count"] = data.orgcode_plants.map(x => x.total)
+                charts["wordCloud2"]["options"]["plugins"] = {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: (item) => `${item.label}:${item.dataset.Count[item.dataIndex]}`
+                        }
+                    }
+                }
+                charts["wordCloud2"].update()
+
+
+
+
+            }
+
+            function populate_mgps_org(data) {
+                //mgps_org 
+                view_data["mgps_org"] = data
+                document.querySelector('.approved_mgps .value').innerHTML = parseInt(data.org_unexecuted_approved_gatepass_count[0]["TOTAL"]).toLocaleString()
+
+
+                //chart 11 mgps org breakdown by month
+                charts["Chart11"].data.labels = data.org_requests_YTD.map(x => x.MONTH)
+                charts["Chart11"].data.datasets[0].label = "Number of MGPS Requests"
+                charts["Chart11"].data.datasets[0].data = data.org_requests_YTD.map(x => x.TOTAL)
+                charts["Chart11"].update()
+
+                //chart 12 mgps org breakdown by suborg
+                charts["Chart12"].data.labels = data.org_issuer_org.map(x => x.org_title)
+                charts["Chart12"].data.datasets[0].data = data.org_issuer_org.map(x => x.total)
+                charts["Chart12"].data.datasets[0].label = "Number of MGPS Requests"
+                charts["Chart12"].update()
+
+
+                //chart 13 MGPS Request by Type
+                charts["Chart13"].data.labels = data.org_status.map(x => x.TYPE)
+                charts["Chart13"].data.datasets[0].label = "Number of MGPS Requests"
+                charts["Chart13"].data.datasets[0].data = data.org_status.map(x => x.TOTAL)
+                charts["Chart13"].update()
+
+
+                //chart 14 mgps request breakdown by area
+                charts["Chart14"].data.labels = data.org_area.map(x => x.AREA)
+                charts["Chart14"].data.datasets[0].label = "Number of MGPS Requests"
+                charts["Chart14"].data.datasets[0].data = data.org_area.map(x => x.TOTAL)
+                charts["Chart14"].update()
+
+
+
+            }
+
+            function populate_mgps_iso(data) {
+
+                view_data["mgps_iso"] = data
+
+                document.querySelector(".mgps_iso .emergency .value").innerHTML = data.iso_emergency_gatepasses.length.toLocaleString()
+                document.querySelector(".mgps_iso .approved .value").innerHTML = data.iso_unexecuted_approved_gatepass.length.toLocaleString()
+                    //chart 15 mgps ytd breakdown by month
+                charts["Chart15"].data.labels = data.iso_requests_YTD.map(x => x.MONTH_NAME)
+                charts["Chart15"].data.datasets[0].label = "MGPS Requests"
+                charts["Chart15"].data.datasets[0].data = data.iso_requests_YTD.map(x => x.TOTAL)
+                charts["Chart15"].update()
+
+                //chart 17 business vs personal breakdown
+                charts["Chart17"].data.labels = data.ISO_business_personal.map(x => x.TYPE)
+                charts["Chart17"].data.datasets[0].label = "Number of MGPS Requests"
+                charts["Chart17"].data.datasets[0].data = data.ISO_business_personal.map(x => x.TOTAL)
+                charts["Chart17"].update()
+                    //chart 16 breakdown by area
+                charts["Chart16"].data.labels = data.ISO_gate_YTD.map(x => x.area_description)
+                charts["Chart16"].data.datasets[0].data = data.ISO_gate_YTD.map(x => x.total)
+                charts["Chart16"].data.datasets[0].label = "Number of MGPS Requests"
+                charts["Chart16"].update()
+                    //Chart 18 top executed per department 
+                charts["Chart18"].data.labels = data.ISO_executor_YTD.sort((a, b) => b.TOTAL - a.TOTAL).slice(0, 5).map(x => x.NAME)
+                charts["Chart18"].data.datasets[0].data = data.ISO_executor_YTD.sort((a, b) => b.TOTAL - a.TOTAL).slice(0, 5).map(x => x.TOTAL)
+                charts["Chart18"].data.datasets[0].label = "Number of Executed MGPS Requests"
+                charts["Chart18"].update()
+            }
+
+            function populate_vms_org(data) {
+
+                view_data["vms_org"] = data
+
+                //VMS Checkins ytd
+                charts["Chart19"].data.labels = data.org_checkins_ytd_per_month.map(x => x.MONTH)
+                charts["Chart19"].data.datasets[0].data = data.org_checkins_ytd_per_month.map(x => x.TOTAL_CHECKINS)
+                charts["Chart19"].data.datasets[0].label = "Total Checkins"
+                charts["Chart19"].update()
+
+                //vms Valid Requestes
+                document.querySelector(".vms_org .active_vms .value").innerHTML = data.org_approved_valid_visit_requests_total[0]['VALID_REQUESTS']
+
+                // most frequent visitors 
+                document.querySelector(".vms_org .freq_visitors .values").innerHTML = data.org_visitors_checkins_frequency.sort((a, b) => b.TOTAL - a.TOTAL).splice(0, 10).map(x => x.FIRST_NAME + " " + x.LAST_NAME + "-" + x.TOTAL).reduce((a, b) => a + b + "<br>", "")
+
+                charts["Chart20"].data.labels = data.org_area_gate.map(x => x.GATE)
+                charts["Chart20"].data.datasets[0].label = 'Number of Checkins'
+                charts["Chart20"].data.datasets[0].data = data.org_area_gate.map(x => x.CHECKINS)
+                charts["Chart20"].update()
+                    //number of visits per org
+                data.org_visits_per_org = data.org_visits_per_org.sort((a, b) => b.total - a.total)
+                charts["Chart21"].data.labels = data.org_visits_per_org.map(x => x.orgtitle)
+                charts["Chart21"].data.datasets[0].label = "Number of visits"
+                charts["Chart21"].data.datasets[0].data = data.org_visits_per_org.map(x => x.total)
+                charts["Chart21"].update()
+
+
+            }
+
+            function populate_vms_iso(data) {
+
+                view_data["vms_iso"] = data
+                    //total checkins YTD
+                charts["Chart22"].data.labels = data.ISO_Checkin_YTD.map(x => x.MONTH_NAME)
+                charts["Chart22"].data.datasets[0].label = "Number of Checkins"
+                charts["Chart22"].data.datasets[0].data = data.ISO_Checkin_YTD.map(x => x.TOTAL_CHECKINS)
+                charts["Chart22"].update()
+
+                //checkins by checkin method
+                charts['Chart33'].data.labels = data.ISO_Checkin_Method.map(x => x.CHECKIN_FROM)
+                charts['Chart33'].data.datasets[0].label = 'Total Checkins'
+                charts['Chart33'].data.datasets[0].data = data.ISO_Checkin_Method.map(x => x.TOTAL)
+                charts['Chart33'].update()
+
+
+
+                //Checkins by Gates & Visit type
+                charts['Chart23'].data.labels = data.ISO_Checkin_method_visit_type.map(x => {
+                    return x.CHECKIN_FROM + "-" + x.VISIT_TYPE
+                })
+                charts['Chart23'].data.datasets[0].label = "Number of Checkins"
+                charts['Chart23'].data.datasets[0].data = data.ISO_Checkin_method_visit_type.map(x => x.TOTAL)
+                charts['Chart23'].update()
+
+
+
+                //valid_visits 
+                document.querySelector('.vms_iso .temporary_valid_visit .value').innerHTML = data.ISO_Valid_visit_type.filter(x => x.VISIT_TYPE == 'TEMPORARY').map(x => x.TOTAL).reduce((a, b) => a + parseInt(b), 0)
+                document.querySelector('.vms_iso .personal_valid_visit .value').innerHTML = data.ISO_Valid_visit_type.filter(x => x.VISIT_TYPE == 'PERSONAL').map(x => x.TOTAL).reduce((a, b) => a + parseInt(b), 0)
+
+                //Number of Checkins per Area
+                charts['Chart24'].data.labels = data.ISO_area.map(x => x.AREA_DESCRIPTION)
+                charts['Chart24'].data.datasets[0].data = data.ISO_area.map(x => x.TOTAL)
+                charts['Chart24'].data.datasets[0].label = 'Number of Checkins'
+                charts['Chart24'].update()
+
+                //Uncheckedout VMS requests
+                document.querySelector('.vms_iso .uncheckedout .value').innerHTML = data.ISO_uncheckedout.length.toLocaleString()
+
+                console.log(data)
+
+            }
+
+            function fetch_method(function_name, callback) {
+                return fetch(`https://supershadycornerman.pythonanywhere.com/${function_name}`, {
+                    method: "GET",
+                }).then(response => response.json()).then(results => {
+                    
+                    callback(results)
+
+
+                })
+            }
+/*
+"", "", "", "",
+    "vms_org", "", "", ""
+
+*/
+            fetch_method("personal_view", populate_personal_view)
+
+            fetch_method("traffic_org", populate_traffic_org_view)
+                //
+            fetch_method("traffic_security", populate_traffic_security_view)
+                //
+            fetch_method("plant_owner", populate_plant_owner_view)
+                //
+            fetch_method("restricted_org", populate_restricted_access_view)
+                //
+            fetch_method("plant_security", populate_security_view)
+                //
+            fetch_method("mgps_org", populate_mgps_org)
+                //
+            fetch_method("mgps_iso", populate_mgps_iso)
+                //
+            fetch_method("vms_org", populate_vms_org)
+                //
+           // fetch_method("vms_iso", populate_vms_iso)
+
+            //add table update
+            document.querySelector('#exampleModal').addEventListener('show.bs.modal', (event) => {
+                console.log("customevent", event)
+                console.log("related_target", event.relatedTarget)
+                if (document.querySelector(".personal").contains(event.relatedTarget) && "personal_view" in view_data) {
+                    let values = Object.keys(view_data["personal_view"]).filter(key => [...event.relatedTarget.classList].indexOf(key) >= 0)
+
+                    console.log(values)
+                    if (values && values.length > 0) {
+                        update_grid(view_data["personal_view"][values[0]])
+                    }
+                } else if (document.querySelector(".traffic_org").contains(event.relatedTarget) && "traffic_org" in view_data) {
+
+                    update_grid(view_data["traffic_org"].orgcode)
+
+                } else if (document.querySelector(".traffic_security").contains(event.relatedTarget) && "traffic_security" in view_data) {
+
+                    update_grid(view_data["traffic_security"].orgcode)
+
+                } else if (document.querySelector(".plant_owner_org").contains(event.relatedTarget) && "plant_owner" in view_data) {
+
+                    if (document.querySelector(".row.restricted_access").contains(event.relatedTarget)) {
+                        update_grid(view_data["plant_owner"].restricted_access)
+                    } //mgps vms orgs vendors
+                    else if (document.querySelector(".plant_owner_org .mgps").contains(event.relatedTarget)) {
+                        update_grid(view_data["plant_owner"].restricted_mgps)
+                    } else if (document.querySelector(".plant_owner_org .vms").contains(event.relatedTarget)) {
+                        update_grid(view_data["plant_owner"].restricted_vms)
+                    } else if (document.querySelector(".plant_owner_org .orgs").contains(event.relatedTarget)) {
+                        update_grid(view_data["plant_owner"].restricted_departments)
+                    } else if (document.querySelector(".plant_owner_org .vendors").contains(event.relatedTarget)) {
+                        update_grid(view_data["plant_owner"].restricted_vendors)
+                    }
+
+
+
+                } else if (document.querySelector(".authorized_access ").contains(event.relatedTarget) && "restricted_org" in view_data) {
+                    if (document.querySelector(".authorized_access .orgcode").contains(event.relatedTarget)) {
+                        update_grid(view_data["restricted_org"].orgcode)
+                    } else if (document.querySelector(".authorized_access .authorized ").contains(event.relatedTarget)) {
+                        update_grid(view_data["restricted_org"].orgcode)
+                    } else if (document.querySelector(".authorized_access .employee_type ").contains(event.relatedTarget)) {
+                        update_grid(view_data["restricted_org"].orgcode)
+                    } else if (document.querySelector(".authorized_access .orgcode_last_utilized ").contains(event.relatedTarget)) {
+                        update_grid(view_data["restricted_org"].orgcode_last_utilized)
+                    } else if (document.querySelector(".authorized_access .orgcode_expiring_next_month ").contains(event.relatedTarget)) {
+                        update_grid(view_data["restricted_org"].orgcode_last_utilized)
+                    } else if (document.querySelector(".authorized_access .orgcode_top_org ").contains(event.relatedTarget)) {
+                        update_grid(view_data["restricted_org"].orgcode_top_org)
+                    } else if (document.querySelector(".authorized_access .orgcode_top_vendor ").contains(event.relatedTarget)) {
+                        update_grid(view_data["restricted_org"].orgcode_top_vendor)
+                    }
+                } else if (document.querySelector(".security_plant ").contains(event.relatedTarget) && "plant_security" in view_data) {
+                    update_grid(view_data["plant_security"].orgcode)
+                } else if (document.querySelector(".mgps_org ").contains(event.relatedTarget) && "mgps_org" in view_data) {
+                    if (document.querySelector(".mgps_org .mgps_ytd").contains(event.relatedTarget)) {
+                        update_grid(view_data["mgps_org"].org)
+                    } else if (document.querySelector(".mgps_org .approved_mgps").contains(event.relatedTarget)) {
+                        update_grid(view_data["mgps_org"].org_unexecuted_approved_gatepass)
+                    } else if (document.querySelector(".mgps_org .suborg").contains(event.relatedTarget)) {
+                        update_grid(view_data["mgps_org"].org)
+                    } else if (document.querySelector(".mgps_org .org_area").contains(event.relatedTarget)) {
+                        update_grid(view_data["mgps_org"].org)
+                    } else if (document.querySelector(".mgps_org .mgps_type").contains(event.relatedTarget)) {
+                        update_grid(view_data["mgps_org"].org)
+                    }
+
+                } else if (document.querySelector(".mgps_iso ").contains(event.relatedTarget) && "mgps_iso" in view_data) {
+                    if (document.querySelector(".mgps_iso .approved").contains(event.relatedTarget)) {
+                        update_grid(view_data["mgps_iso"].iso_unexecuted_approved_gatepass)
+                    } else if (document.querySelector(".mgps_iso .emergency").contains(event.relatedTarget)) {
+                        update_grid(view_data["mgps_iso"].iso_emergency_gatepasses)
+                    } else if (document.querySelector(".mgps_iso .executor").contains(event.relatedTarget)) {
+                        update_grid(view_data["mgps_iso"].ISO_executor_YTD)
+                    } else {
+                        update_grid(view_data["mgps_iso"].iso)
+                    }
+                } else if (document.querySelector(".vms_org ").contains(event.relatedTarget) && "vms_org" in view_data) {
+                    if (document.querySelector(".vms_org .active_vms").contains(event.relatedTarget)) {
+                        update_grid(view_data["vms_org"].org_approved_valid_visit_requests)
+                    } else if (document.querySelector(".vms_org .freq_visitors").contains(event.relatedTarget)) {
+                        update_grid(view_data["vms_org"].org_visitors_checkins_frequency)
+                    } else {
+                        update_grid(view_data["vms_org"].org)
+                    }
+
+                }
+            })
+        </script>
+
+</body>
+
+</html>

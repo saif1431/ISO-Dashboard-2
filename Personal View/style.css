@@ -1,0 +1,115 @@
+@font-face {
+    font-family: alfont;
+    src: url(".../assets/fonts/alfont_com_Manifa-V2-Bold.ttf");
+}
+:root {
+    --body-bg-color: #fff;
+    --body-bgC-color: #EDEDED;
+    --primary-color: #fbf9f9;
+    --primary-text-color: #000;
+      }
+      .dark-theme {
+    --body-bg-color: #1a2035;
+    --body-bgC-color: #1a2035;
+    --primary-color: #2b2c40;
+    --primary-text-color: #fff;
+      }
+
+*{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+}
+html, body{
+      height: 100%;
+      width: 100%;
+      background-color: #EDEDED;
+      font-family: alfont;
+}
+
+.nav{
+      display: flex;
+      justify-content: space-between;
+      /* padding-top: 2vw; */
+      padding: 3vw;
+      align-items: center;
+      background-color: var(--body-bg-color);
+      color: var(--primary-text-color);
+}
+header{
+      display: flex;
+      align-items: center;
+      justify-content:center;
+gap: 4vw;
+}
+.headerDiv1{
+      display: flex;
+      flex-direction: column;
+}
+.headerDiv2 h1{
+      font-size: 8vw;
+}
+.headerDiv2 p{
+      font-size: 4vw;
+}
+
+.wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100%;
+      background-color: #ffffff; 
+      z-index: 9999;
+      transition: opacity 1s ease; 
+  }
+  
+  /* Once content is loaded, add a class to hide the loader */
+  .wrapper.hidden {
+    opacity: 0;
+    pointer-events: none; 
+}
+  
+
+  .nav-image, .header-image {
+      opacity: 0;
+      transform: translateX(-100%);
+      animation: slideInLeft 1s forwards ease;
+  }
+  
+  .nav-second-image, .header-second-image {
+      opacity: 0;
+      transform: translateX(-100%);
+      animation: slideInLeft 1s forwards ease;
+      animation-delay: 0.5s; /* Delay the second image slightly */
+  }
+  
+  /* Animations for text */
+  .header-text {
+      opacity: 0;
+      transform: translateX(100%);
+      animation: slideInRight 1s forwards ease;
+  }
+  
+  .header-subtext {
+      opacity: 0;
+      transform: translateX(100%);
+      animation: slideInRight 1s forwards ease;
+      animation-delay: 0.5s; /* Delay the subtext slightly */
+  }
+  
+  /* Keyframes for sliding from left */
+  @keyframes slideInLeft {
+      to {
+          opacity: 1;
+          transform: translateX(0);
+      }
+  }
+  
+  /* Keyframes for sliding from right */
+  @keyframes slideInRight {
+      to {
+          opacity: 1;
+          transform: translateX(0);
+      }
+  }

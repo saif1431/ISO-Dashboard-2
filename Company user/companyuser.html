@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>ISO Dashboard</title>
+      <link rel="stylesheet" href="/ISO Personal/ISOPersonal.css">
+      <link rel="stylesheet" href="/style.css">
+      <link rel="shortcut icon" href="/images/Saqr logo 48.png" type="image/x-icon">
+      <link rel="stylesheet" href="/Personal View/sect1.css">
+      <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+      rel="stylesheet"
+      />
+</head>
+<body>
+    <div style="display: none;" class="sipnner-container">
+        <div class="loader"></div>
+       </div>
+      <div class="page1">
+            <div class="navbar">
+                  <nav>
+                      <img src="/images/Saqr logo 48.png" alt="">
+                      <img class="logo2" src="/images/logo2 (2).png" alt="">
+                  </nav>
+          
+                  <div class="nav2">
+                      <div class="nav-links">
+                          <a  href="/Personal.html" >Personal View</a>
+                          <a class="active" href="/Personal View/operationalview.html">Operational View
+                              <span class="ISO">
+                                    <span class="dot"></span>ISO Personal</span>
+                          </a>
+                      </div>
+                      <div class="btns">
+                          <p class="welcomeBtn">Welcome Afnan!</p>
+                          <div class="setting">
+                              <p class="date">August 28, 2024</p>
+                              <!-- <i class="ri-settings-2-line settingicon"></i> -->
+                          </div>
+                      </div>
+                  </div>
+            </div>
+            <hr>
+            <div style="background-color: #EDEDED;">
+                <div class="main-content">
+                    <div data-url="../index.html" class="card" data-name="Traffic Violation" onclick="showGraphPage(7, 'Traffic Violation')">
+                        <img style="width: 25px;" class="info" src="/images/info.svg" alt="">
+                        <img src="/images/image 179.png" alt="">
+                        <h3>Traffic Violation</h3>
+                    </div>
+                    <div data-url="../index.html" class="card" data-name="Plants Management" onclick="showGraphPage(8, 'Plants Management')">
+                        <img style="width: 25px;" class="info" src="/images/info.svg" alt="">
+                        <img src="/images/iso img2.png" alt="">
+                        <h3>Plants Management</h3>
+                    </div>
+                    <div data-url="../index.html" class="card" data-name="Restricted Access" onclick="showGraphPage(3, 'Restricted Access')">
+                        <img style="width: 25px;" class="info" src="/images/info.svg" alt="">
+                        <img src="/images/image (2).png" alt="">
+                        <h3>Restricted Access</h3>
+                    </div>
+                    <div data-url="../index.html" class="card" data-name="Material Gate Pass" onclick="showGraphPage(9, 'Material Gate Pass')">
+                        <img style="width: 25px;" class="info" src="/images/info.svg" alt="">
+                        <img src="/images/image (3).png" alt="">
+                        <h3>Material Gate Pass</h3>
+                    </div>
+                    <div data-url="../index.html" class="card" data-name="Visitor Management" onclick="showGraphPage(10, 'Visitor Management')">
+                        <img style="width: 25px;" class="info" src="/images/info.svg" alt="">
+                        <img src="/images/image (4).png" alt="">
+                        <h3>Visitor Management</h3>
+                    </div>
+                    
+                </div>
+            </div>
+      </div>
+
+      <script>
+        const cards = document.querySelectorAll('.card');
+const spinner = document.getElementById('sipnner-container');
+
+// Function to show spinner and navigate to next page
+function showSpinnerAndNavigate(card) {
+    // Display the spinner
+    spinner.style.display = 'block';
+
+    // Get the page URL from the data attribute
+    const nextPage = card.getAttribute('data-url');
+
+    setTimeout(() => {
+        
+        window.location.href = nextPage;
+    }, 2000); 
+}
+
+cards.forEach(card => {
+    card.addEventListener('click', () => showSpinnerAndNavigate(card));
+});
+
+      function showGraphPage(graphId, cardName) {   
+          // Redirect to index.html with graphId and cardName as query parameters
+          window.location.href = `../index.html?graph=${graphId}&name=${encodeURIComponent(cardName)}`;
+      }
+      </script>
+</body>
+</html>
